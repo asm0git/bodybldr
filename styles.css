@@ -50,6 +50,14 @@ body {
     line-height: 1.6;
 }
 
+.container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 100px;
+}
+
+
 /*-----TYPOGRAPHY-----
 Figma values:
     DESKTOP     TABLET      MOBILE
@@ -102,32 +110,6 @@ p.white{
 
 p.black{
     color: var(--clr-main);
-}
-
-/* =====================================
-        COVER SECTION (HERO)
-======================================*/
-
-#cover{
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    background: linear-gradient(
-        to right,
-        rgba(10, 10, 13, 1) 0%,
-        rgba(10, 10, 13, 1) 91%,
-        rgba(10, 10, 13, 0) 100%
-    ),
-    url("assets/arnold.png"),
-    url("assets/cbum.png"),
-    url("assets/ronnie.png");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 /*-----------NAVBAR-----------*/
@@ -211,22 +193,32 @@ p.black{
     margin-top: 10px;
 }
 
-/* Additional Desktop ADjustments for Navigation Bar */
+/* Desktop only */
 @media (min-width: 1025px) {
-    
+    /* Make navbar relative (already is) */
+    .navbar {
+        position: relative;
+    }
+
+    /* Position line relative to navbar */
     .nav-links a::after {
         content: '';
         position: absolute;
         left: 0;
-        bottom: -20px; 
-        width: 100%; 
+        bottom: 0; /* sticks to bottom of navbar */
+        width: 100%; /* full width of the link */
         height: 2px;
         background-color: var(--clr-tertiary);
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 0.3s ease;
     }
+
+    .nav-links a:hover::after {
+        transform: scaleX(1);
+    }
 }
+
 /* Tablet Adjustments for Navigation Bar */
 @media (max-width: 1024px) {
     .navbar {
@@ -265,3 +257,9 @@ p.black{
         text-align: center;
     }
 }
+
+/* =====================================
+        COVER SECTION (HERO)
+======================================*/
+
+
