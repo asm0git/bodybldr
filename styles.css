@@ -1,265 +1,449 @@
 /*
-    BODYBLDR - a fitness website for lifters and gymgoers.
-    In partial fulfillment of the requirements for Introduction to Web Programming for Computer Science (6WEBCS)
-
-    Author: Aerith Catap
-    Block: CS-201
-    Date: October 21, 2025
-    Submitted to: Mr. Chris Almocera
-
-    File: styles.css
+  BODYBLDR – Fitness website for lifters and gymgoers
+  Author: Aerith Catap | Block: CS-201
+  Date: October 21, 2025
+  Instructor: Mr. Chris Almocera
+  File: styles.css
 */
 
-/*-----ROOT VARIABLES-----*/
-:root{
-    /* Font */
-    --font-main: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    /*Color Palette*/
-    --clr-main: #0A0A0D;
-    --clr-secondary: #151619;
-    --clr-tertiary: #FFFFFF;
-
-    /*Container widths*/
-    --max-width-desktop: 1200px;
-    --max-width-tablet: 900px;
-    --max-width-mobile: 100%;
-
-    /*Font weights*/
-    --fw-medium: 500;
-    --fw-bold: 700;
-    --fw-extrabold: 800;
-    --fw-black: 900;
+/*==============================
+  ROOT VARIABLES
+==============================*/
+:root {
+  --font-main: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --clr-main: #0A0A0D;
+  --clr-secondary: #151619;
+  --clr-tertiary: #FFFFFF;
+  /* navbar height used to calculate cover height so cover never exceeds viewport */
+  --nav-h: 90px;
+  --cover-title-size: clamp(1.5rem, 8vw, 6rem);
+  --cover-subtitle-size: clamp(0.875rem, 2vw, 1.5rem);
+  --cover-title-lineheight: 1.05;
+  --max-width-desktop: 1200px;
+  --max-width-tablet: 900px;
+  --max-width-mobile: 100%;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  --fw-black: 900;
 }
 
-/*-----CSS RESET-----*/
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/*==============================
+  RESET & BASE
+==============================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html{
-    scroll-behavior: smooth;
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: var(--font-main);
-    font-weight: var(--fw-medium);
-    background-color: var(--clr-main);
-    color: var(--clr-tertiary);
-    line-height: 1.6;
+  font-family: var(--font-main);
+  font-weight: var(--fw-medium);
+  background-color: var(--clr-main);
+  color: var(--clr-tertiary);
+  line-height: 1.6;
 }
 
 .container {
-    width: 100%;
-    max-width: 1920px;
-    margin: 0 auto;
-    padding: 0 100px;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-
-/*-----TYPOGRAPHY-----
-Figma values:
-    DESKTOP     TABLET      MOBILE
-h1 96px         64px        24px
-h2 24px         20px        14px
-h3 96px         64px        24px
-h4 36px         32px        14px
-h5 36px         32px        16px
-h6 24px         20px        14px
-*/
-
-h1{
-    font-weight: var(--fw-extrabold);
-    font-size: clamp(1.5rem, 5vw, 6rem);
-    line-height: 1.1;
+/*==============================
+  TYPOGRAPHY
+==============================*/
+h1 {
+  font-weight: var(--fw-extrabold);
+  font-size: clamp(1.5rem, 5vw, 6rem);
+  line-height: 1.1;
 }
 
-h2{
-    font-weight: var(--fw-medium);
-    font-size: clamp(0.875rem, 1.5vw, 1.5rem);
+h2 {
+  font-weight: var(--fw-medium);
+  font-size: clamp(0.875rem, 1.5vw, 1.5rem);
 }
 
-h3{
-    font-weight: var(--fw-black);
-    font-size: clamp(1.5rem, 5vw, 64px);
-    text-transform: uppercase;
+h3 {
+  font-weight: var(--fw-black);
+  font-size: clamp(1.5rem, 5vw, 64px);
+  text-transform: uppercase;
 }
 
-h4{
-    font-weight: var(--fw-medium);
-    font-style: italic;
-    font-size: clamp(0.875rem, 2vw, 2.25rem);
+h4 {
+  font-weight: var(--fw-medium);
+  font-style: italic;
+  font-size: clamp(0.875rem, 2vw, 2.25rem);
 }
 
-h5{
-    font-weight: var(--fw-bold);
-    font-style: italic;
-    font-size: clamp(1rem, 2vw, 2.25rem);
+h5 {
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 2.25rem);
 }
 
-p{
-    font-weight: var(--fw-medium);
-    font-size: clamp(0.875rem, 1.8vw, 1.5rem);
-    line-height: 0.8;
+p {
+  font-weight: var(--fw-medium);
+  font-size: clamp(0.875rem, 1.8vw, 1.5rem);
+  line-height: 0.8;
 }
 
-p.white{
-    color: var(--clr-tertiary);
-}
+p.white { color: var(--clr-tertiary); }
+p.black { color: var(--clr-main); }
 
-p.black{
-    color: var(--clr-main);
-}
-
-/*-----------NAVBAR-----------*/
+/*==============================
+  NAVBAR
+==============================*/
 .navbar {
-    position: sticky; 
-    top: 0;
-    z-index: 100;
-    background-color: var(--clr-main);
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 90px;
-    padding: 0 2rem;
-    position: relative;
-    border-bottom: 2px solid var(--clr-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--clr-main);
+  padding: 0 2rem;
+  border-bottom: 2px solid var(--clr-secondary);
 }
 
-/* Navbar links */
 .nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    position: relative; 
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
 }
 
 .nav-links li:not(.logo) {
-    flex: 1;
-    text-align: center;
-    display: flex;         
-    align-items: center;     
-    justify-content: center;
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-links a {
-    position: relative;
-    color: var(--clr-tertiary);
-    font-weight: var(--fw-medium);
-    text-decoration: none;
-    padding: 0 1rem;     
-    height: 100%;          
-    display: flex;          
-    align-items: center;  
-    justify-content: center;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  color: var(--clr-tertiary);
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-links a:hover {
-    background-color: var(--clr-secondary);
-    border-radius: 4px;
+  background-color: var(--clr-secondary);
+  border-radius: 4px;
 }
 
 .nav-links a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--clr-tertiary);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--clr-tertiary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
 }
 
 .nav-links a:hover::after {
-    transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 .logo {
-    flex: 0 0 auto;
-    text-align: center;
+  flex: 0 0 auto;
+  text-align: center;
 }
 
 .logo img {
-    width: 80px; 
-    height: auto;
-    margin-top: 10px;
+  width: 80px;
+  height: auto;
+  margin-top: 10px;
 }
 
-/* Desktop only */
-@media (min-width: 1025px) {
-    /* Make navbar relative (already is) */
-    .navbar {
-        position: relative;
-    }
-
-    /* Position line relative to navbar */
-    .nav-links a::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0; /* sticks to bottom of navbar */
-        width: 100%; /* full width of the link */
-        height: 2px;
-        background-color: var(--clr-tertiary);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-        transform: scaleX(1);
-    }
-}
-
-/* Tablet Adjustments for Navigation Bar */
 @media (max-width: 1024px) {
-    .navbar {
-        height: 70px;
-    }
-
-    .logo {
-        display: none;
-    }
-
-    .nav-links li:not(.logo) {
-        font-size: 0.9rem;
-    }
+  .navbar { height: 70px; }
+  .logo { display: none; }
+  .nav-links a { font-size: 0.95rem; }
 }
 
-/* Mobile Adjustments for Navigation Bar */
 @media (max-width: 414px) {
-    .navbar {
-        height: 50px;
-        padding: 0 1rem; 
-    }
-
-    .logo img {
-        width: 50px;
-    }
-
-    .nav-links {
-        flex-direction: row; 
-        gap: 0.5rem;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .nav-links li:not(.logo) {
-        flex: 1;
-        text-align: center;
-    }
+  .navbar {
+    height: 50px;
+    padding: 0 1rem;
+  }
+  .nav-links {
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: space-between;
+  }
+  .nav-links a { font-size: 0.95rem; }
+  .logo img { width: 50px; }
 }
 
-/* =====================================
-        COVER SECTION (HERO)
-======================================*/
+/*==============================
+  COVER SECTION
+==============================*/
+#cover {
+  position: relative;
+  width: 100%;
+  /* make cover height fit the viewport minus the navbar so it won't create vertical overflow */
+  min-height: calc(100vh - var(--nav-h));
+  max-height: 950px;
+  overflow: hidden;
+  background-color: var(--clr-main);
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: auto min(calc(100vh - var(--nav-h)), 950px);
+  transition: background-image 1s ease-in-out, opacity 0.5s ease;
+  padding-top: var(--nav-h);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: var(--clr-tertiary);
+}
+
+#cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    rgba(10, 10, 13, 1) 0%,
+    rgba(10, 10, 13, 0.91) 80%,
+    rgba(10, 10, 13, 0) 100%
+  );
+}
+
+.cover-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: min(5vh, 3.5rem);
+  height: min(85vh, 850px);
+  margin-left: clamp(3rem, 8vw, 12rem);
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  overflow: hidden;
+}
+
+.cover-content.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cover-icon {
+  width: clamp(80px, 10vw, 180px);
+  height: auto;
+  margin-bottom: min(3vh, 2rem);
+}
+
+#cover-title {
+  font-weight: var(--fw-extrabold);
+  font-size: clamp(1.5rem, 7vw, 6rem);
+  line-height: 1.05;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  white-space: normal;
+  word-break: break-word;
+  margin-bottom: min(4vh, 2.5rem);
+}
+
+#cover-title .extrabold { font-weight: var(--fw-extrabold); }
+#cover-title .medium { font-weight: var(--fw-medium); }
+
+.cover-content h2 {
+  font-weight: var(--fw-medium);
+  font-style: italic;
+  line-height: 1.4;
+  font-size: clamp(0.875rem, 2.2vw, 1.65rem);
+  max-width: clamp(250px, 45vw, 550px);
+  white-space: normal;
+  overflow-wrap: break-word;
+  margin-bottom: min(4vh, 2.5rem);
+}
+
+.cover-content > .icons {
+  display: flex;
+  flex-direction: row;
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+  margin-bottom: min(5vh, 3rem);
+}
+
+.arrow-down {
+  width: clamp(28px, 3vw, 56px);
+  margin-top: 1rem;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+#cover.dimmed { opacity: 0.2; }
+
+@media (max-height: 800px) {
+  .cover-content {
+    gap: min(3vh, 1.5rem);
+    padding-top: min(6vh, 2.5rem);
+    height: min(80vh, 700px);
+  }
+}
+
+/*==============================
+  TABLET
+==============================*/
+/*==============================
+  TABLET (FIXED)
+==============================*/
+@media (max-width: 1024px) {
+  #cover {
+    position: relative;
+    background-size: auto 768px;
+    background-position: right top;
+    min-height: 768px;
+    max-height: 768px;
+    width: 100%;
+    padding-top: 70px;
+    overflow: visible; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  :root { --photo-approx: 48vw; }
+
+  #cover::before {
+    background: linear-gradient(
+      to right,
+      rgba(10, 10, 13, 1) 0%,
+      rgba(10, 10, 13, 0.9) calc(100% - var(--photo-approx)),
+      rgba(10, 10, 13, 0) 100%
+    );
+  }
+
+  .cover-content {
+    position: relative;
+    margin-left: 3rem;
+    padding-top: 0;
+    padding-right: clamp(1rem, 4vw, 4rem);
+    height: auto; /* ✅ remove fixed height */
+    gap: clamp(0.75rem, 2vh, 1.5rem);
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: min(calc(100% - var(--photo-approx) - 1.5rem), 480px);
+    transform: translateY(-5%);
+  }
+
+  .cover-icon {
+    width: clamp(70px, 9vw, 120px);
+    margin-bottom: 0.5rem;
+  }
+
+  #cover-title {
+    font-size: clamp(1.8rem, 5.5vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .cover-content h2 {
+    font-size: clamp(1rem, 1.9vw, 1.3rem);
+    line-height: 1.4;
+    max-width: 90%;
+    margin-bottom: 1rem;
+  }
+
+  .arrow-down {
+    width: clamp(36px, 4vw, 52px);
+    margin-top: 1rem;
+    position: relative;
+    bottom: 0;
+    animation: bounce 2s infinite ease-in-out;
+    align-self: flex-start;
+  }
+}
 
 
+/*==============================
+  MOBILE
+==============================*/
+@media (max-width: 600px) {
+  #cover {
+    background-size: auto 311px;
+    background-position: right top;
+    min-height: 311px;
+    max-height: 311px;
+    padding-top: 50px;
+    display: flex;
+    align-items: flex-start;
+    overflow: visible;
+  }
+
+  .cover-content {
+    margin-left: 1rem;
+    padding-top: 0.5rem;
+    padding-right: 1.25rem;
+    height: calc(100% - 0.5rem);
+    gap: 0.35rem;
+    justify-content: flex-start;
+    max-width: calc(100% - var(--photo-approx) + 2rem);
+    overflow: visible;
+  }
+
+  .cover-icon {
+    width: 42px;
+    margin-bottom: 0.25rem;
+  }
+
+  #cover-title {
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+  }
+
+  .cover-content h2 {
+    font-size: clamp(0.7rem, 3.3vw, 0.9rem);
+    line-height: 1.3;
+    max-width: 95%;
+    margin-bottom: 0.5rem;
+  }
+
+  .arrow-down {
+    width: 20px;
+    margin-top: 0.25rem;
+    animation: bounce 2s infinite ease-in-out;
+    position: relative;
+    bottom: 0;
+  }
+}
