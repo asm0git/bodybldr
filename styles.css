@@ -80,7 +80,6 @@ h2 {
 h3 {
   font-weight: var(--fw-black);
   font-size: clamp(1.5rem, 5vw, 64px);
-  text-transform: uppercase;
 }
 
 h4 {
@@ -323,9 +322,6 @@ p.black { color: var(--clr-main); }
 /*==============================
   TABLET
 ==============================*/
-/*==============================
-  TABLET (FIXED)
-==============================*/
 @media (max-width: 1024px) {
   #cover {
     position: relative;
@@ -444,4 +440,412 @@ p.black { color: var(--clr-main); }
     position: relative;
     bottom: 0;
   }
+}
+/*==============================
+  TRAINING SECTION
+==============================*/
+#training {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--clr-main);
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem 0;
+    margin-top: 0;
+}
+
+
+.training-container {
+    width: 60%;
+    max-width: 1152px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    padding: 60px 0;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+/* Section Header */
+.training-header {
+    text-align: center;
+    margin-bottom: 80px;
+    text-transform: uppercase;
+}
+
+.training-title {
+    font-family: var(--font-main);
+    font-size: clamp(3rem, 6.15vw, 118px);
+    font-weight: var(--fw-black);
+    color: var(--clr-tertiary);
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1;
+}
+
+.training-subtitle {
+    font-family: var(--font-main);
+    font-size: clamp(1rem, 2.29vw, 44px);
+    font-weight: var(--fw-medium);
+    font-style: italic;
+    color: var(--clr-tertiary);
+    margin: 8px 0 0 0;
+    line-height: 1.2;
+}
+
+/* Training Phases - Row Containers */
+.training-phase {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(2rem, 4vw, 5rem);
+    margin-bottom: 60px;
+    min-height: clamp(200px, 15.63vw, 300px);
+    position: relative; /* keep for phase-line positioning */
+}
+
+.training-phase .phase-3{
+  margin-bottom: 0;
+}
+.training-phase.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Phase 1 & 3: Image Left, Content Right */
+.phase-1,
+.phase-3 {
+    justify-content: flex-start;
+}
+
+.phase-1 .phase-image-container,
+.phase-3 .phase-image-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.phase-1 .phase-line,
+.phase-3 .phase-line {
+    position: absolute;
+    top: calc(clamp(200px, 15.63vw, 300px) * 0); /* top of image container */
+    left: calc(clamp(220px, 18.75vw, 360px)/2); /* start at horizontal center of image */
+    width: calc(
+        100% - clamp(220px, 18.75vw, 360px)/2 - clamp(40px, 4vw, 50px)/2
+    ); /* stop at center of phase number (half of number width) */
+    transform-origin: left;
+}
+
+/* Phase 2 line: start at right image center, point to number center */
+.phase-2 .phase-line {
+    position: absolute;
+    top: 0; /* top of image container */
+    right: calc(clamp(220px, 18.75vw, 360px)/2); /* center of image container */
+    width: calc(
+        100% - clamp(220px, 18.75vw, 360px)/2 - clamp(40px, 4vw, 50px)/2
+    ); /* line extends to center of phase number */
+    transform-origin: right;
+}
+
+.phase-1 .phase-number,
+.phase-3 .phase-number {
+    position: absolute;
+    right: 0;
+    top: -20px;
+    bottom: -20px;
+}
+
+.phase-1 .phase-content,
+.phase-3 .phase-content {
+    margin-left: auto;
+    text-align: right;
+    align-items: flex-end;
+    padding-right: 0;
+}
+
+/* Phase 2: Content Left, Image Right */
+.phase-2 {
+    justify-content: flex-end;
+}
+
+.phase-2 .phase-content {
+    margin-right: auto;
+    text-align: left;
+    align-items: flex-start;
+    padding-left: 0;
+}
+
+.phase-2 .phase-number {
+    position: absolute;
+    left: 0;
+    top: -20px;
+}
+
+.phase-2 .phase-image-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* Phase Image Container - Rectangle */
+.phase-image-container {
+    position: absolute;
+    width: clamp(220px, 18.75vw, 360px);
+    height: clamp(200px, 15.63vw, 300px);
+    border: 3px solid var(--clr-tertiary);
+    border-radius: 100px;
+    padding: 2px;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.phase-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(100%) contrast(1.1);
+    display: block;
+    border-radius: 100px;
+}
+
+/* Connecting Line */
+.phase-line {
+    height: 2px;
+    background-color: var(--clr-tertiary);
+    transform: scaleX(0);
+    transition: transform 0.7s ease 0.3s;
+    z-index: 1;
+}
+
+.training-phase.visible .phase-line {
+    transform: scaleX(1);
+}
+
+/* Phase Number - Circle with Primary Background */
+.phase-number {
+    width: clamp(20px, 4.17vw, 40px);
+    height: clamp(20px, 4.17vw, 40px);
+    border-radius: 50%;
+    background-color: var(--clr-tertiary); /* Primary color background */
+    border: 2px solid var(--clr-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.5s ease 0.5s, 
+                transform 0.5s ease 0.5s;
+}
+
+.training-phase.visible .phase-number {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.phase-number span {
+    font-family: var(--font-main);
+    font-size: clamp(11px, 2.5vw, 20px);
+    font-weight: var(--fw-extrabold);
+    color: var(--clr-main); 
+    line-height: 1;
+}
+
+/* Phase Content */
+.phase-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0;
+    max-width: calc(100% - clamp(220px, 18.75vw, 360px) - clamp(60px, 4.17vw, 80px) - 40px);
+    padding: 0;
+    min-height: clamp(200px, 15.63vw, 300px);
+    position: relative;
+}
+
+.phase-content.right {
+    align-items: flex-end;
+}
+
+.phase-content.left {
+    align-items: flex-start;
+}
+
+.phase-title {
+    font-family: var(--font-main);
+    font-size: clamp(1.75rem, 2.92vw, 56px);
+    font-weight: var(--fw-bold);
+    font-style: italic;
+    color: var(--clr-tertiary);
+    margin: 0;
+    margin-top: 14%;
+    line-height: 1.1;
+}
+
+.phase-description {
+    font-family: var(--font-main);
+    font-size: clamp(0.875rem, 1.04vw, 20px);
+    font-weight: var(--fw-medium);
+    color: var(--clr-tertiary);
+    line-height: 1.5;
+    margin-bottom: 10%;
+}
+
+/* Footer Tagline */
+.training-footer {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.footer-tagline {
+    font-family: var(--font-main);
+    font-size: clamp(1rem, 1.46vw, 28px);
+    font-weight: var(--fw-medium);
+    color: var(--clr-tertiary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.footer-tagline .italic {
+    font-style: italic;
+    font-weight: var(--fw-medium);
+}
+
+/* Tablet Responsive (1024px x 900px max) */
+@media (max-width: 1024px) {
+    .training-container {
+        width: 70%;
+        max-width: 716.8px; /* 70% of 1024px */
+        max-height: 900px;
+        padding: 50px 0;
+    }
+
+    .training-header {
+        margin-bottom: 60px;
+    }
+
+    .training-title {
+        font-size: clamp(2.5rem, 7.81vw, 80px);
+    }
+
+    .training-subtitle {
+        font-size: clamp(0.875rem, 2.93vw, 30px);
+    }
+
+    .training-phase {
+        margin-bottom: 50px;
+        min-height: clamp(160px, 19.53vw, 200px);
+    }
+
+    .phase-image-container {
+        width: clamp(180px, 23.44vw, 240px);
+        height: clamp(160px, 19.53vw, 200px);
+    }
+
+    .phase-line{
+      display:none;
+    }
+
+    .phase-number {
+        width: clamp(30px, 5.86vw, 40px);
+        height: clamp(30px, 5.86vw, 40px);
+    }
+
+    .phase-number span {
+        font-size: clamp(1.3rem, 3.52vw, 24px);
+    }
+
+    .phase-content {
+        max-width: calc(100% - clamp(180px, 23.44vw, 240px) - clamp(50px, 5.86vw, 60px) - 30px);
+        gap: 10px;
+    }
+
+    .phase-title {
+        font-size: clamp(1.5rem, 3.91vw, 40px);
+    }
+
+    .phase-description {
+        font-size: clamp(0.8rem, 1.56vw, 16px);
+    }
+
+    .training-footer {
+        margin-top: 50px;
+        padding-top: 30px;
+    }
+
+    .footer-tagline {
+        font-size: clamp(0.875rem, 1.95vw, 20px);
+    }
+}
+
+/* Mobile Responsive (414px x 550px max) */
+@media (max-width: 414px) {
+    .training-phase {
+        display: flex;
+        flex-direction: column; /* stack vertically */
+        align-items: center;
+        text-align: center;
+        gap: 1rem; /* spacing between items */
+        min-height: auto; /* let height adjust naturally */
+        position: relative; /* reset for absolute children */
+    }
+
+    /* Reset image container positioning */
+    .phase-image-container {
+        position: static !important;
+        width: clamp(140px, 43.48vw, 180px);
+        height: clamp(120px, 36.23vw, 150px);
+        border-radius: 40px;
+        margin: 0 !important;
+    }
+
+    /* Hide connecting lines */
+    .phase-line {
+        display: none !important;
+    }
+
+    /* Reset numbers */
+    .phase-number {
+        position: static !important;
+        width: clamp(45px, 12.08vw, 50px);
+        height: clamp(45px, 12.08vw, 50px);
+        margin: 0 !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        background-color: var(--clr-tertiary);
+    }
+
+    .phase-number span {
+        font-size: clamp(1.5rem, 7.25vw, 30px);
+        color: var(--clr-main);
+    }
+
+    /* Phase content */
+    .phase-content {
+        max-width: 100% !important;
+        text-align: center !important;
+        align-items: center !important;
+        gap: 0.5rem;
+        padding: 0;
+        margin: 0 !important;
+    }
+
+    .phase-title {
+        font-size: clamp(1.5rem, 7.73vw, 32px);
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .phase-description {
+        font-size: clamp(0.75rem, 3.86vw, 16px);
+        line-height: 1.4;
+        text-align: center;
+    }
 }

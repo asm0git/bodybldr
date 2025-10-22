@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Quotes (rotating every 6s)
   const titles = [
-    `<span class="medium">Your</span> <span class="extrabold">body</span>,<br><span class="extrabold">your blueprint.</span>`,
+    `<span class="medium">Your</span> <span class="extrabold">body</span>,<br><span class="medium">your</span> <span class="extrabold"> blueprint.</span>`,
     `<span class="extrabold">Muscle is earned,</span><br><span class="medium">not gifted.</span>`,
     `<span class="extrabold">Train</span> <span class="medium">smarter</span>,<br><span class="medium">grow</span> <span class="extrabold">stronger.</span>`
   ];
@@ -69,4 +69,28 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+
+// Training Section Scroll Animations
+document.addEventListener('DOMContentLoaded', function() {
+    const trainingPhases = document.querySelectorAll('.training-phase');
+    
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 200); // Stagger animation by 200ms
+            }
+        });
+    }, observerOptions);
+    
+    trainingPhases.forEach(phase => {
+        observer.observe(phase);
+    });
 });
