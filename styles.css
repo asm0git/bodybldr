@@ -389,9 +389,6 @@ p.black { color: var(--clr-main); }
 }
 
 
-/*==============================
-  MOBILE
-==============================*/
 @media (max-width: 414px) {
   #cover {
     background-size: auto 311px;
@@ -456,6 +453,15 @@ p.black { color: var(--clr-main); }
     padding: 2rem 0;
     margin-top: 0;
 }
+
+  /* Dimming behavior (matches cover) */
+  #training {
+    transition: opacity 0.5s ease, filter 0.5s ease;
+  }
+
+  #training.dimmed {
+    opacity: 0.25;
+  }
 
 
 .training-container {
@@ -784,33 +790,28 @@ p.black { color: var(--clr-main); }
     }
 }
 
-/* Mobile Responsive (414px x 550px max) */
 @media (max-width: 414px) {
     .training-phase {
         display: flex;
         flex-direction: column; /* stack vertically */
         align-items: center;
         text-align: center;
-        gap: 1rem; /* spacing between items */
-        min-height: auto; /* let height adjust naturally */
-        position: relative; /* reset for absolute children */
+        gap: 0.75rem; /* spacing between items */
+        min-height: auto;
+        position: relative;
     }
 
-    /* Reset image container positioning */
+    /* Phase Image Container */
     .phase-image-container {
         position: static !important;
         width: clamp(140px, 43.48vw, 180px);
         height: clamp(120px, 36.23vw, 150px);
         border-radius: 40px;
         margin: 0 !important;
+        order: 1; /* always first */
     }
 
-    /* Hide connecting lines */
-    .phase-line {
-        display: none !important;
-    }
-
-    /* Reset numbers */
+    /* Phase Number */
     .phase-number {
         position: static !important;
         width: clamp(45px, 12.08vw, 50px);
@@ -819,6 +820,7 @@ p.black { color: var(--clr-main); }
         top: auto !important;
         left: auto !important;
         right: auto !important;
+        order: 2; /* after image */
         background-color: var(--clr-tertiary);
     }
 
@@ -827,25 +829,668 @@ p.black { color: var(--clr-main); }
         color: var(--clr-main);
     }
 
-    /* Phase content */
+    /* Phase Content */
     .phase-content {
         max-width: 100% !important;
         text-align: center !important;
         align-items: center !important;
-        gap: 0.5rem;
+        gap: 0.25rem;
         padding: 0;
         margin: 0 !important;
+        order: 3; /* after number */
     }
 
     .phase-title {
         font-size: clamp(1.5rem, 7.73vw, 32px);
-        text-align: center;
         margin-top: 0;
     }
 
     .phase-description {
         font-size: clamp(0.75rem, 3.86vw, 16px);
         line-height: 1.4;
-        text-align: center;
+        margin-top: 0;
     }
+
+    /* Hide connecting lines */
+    .phase-line {
+        display: none !important;
+    }
+}
+
+
+/* Section layout */
+.nutrition-section {
+  padding: clamp(40px, 8vw, 100px) 5vw;
+  text-align: center;
+  color: white;
+  background-color: #0d0d0d;
+}
+
+/* Titles */
+.nutrition-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: 0.5rem;
+}
+
+.nutrition-subtitle {
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  margin-bottom: clamp(50px, 6vw, 100px);
+}
+
+/* Container grid */
+.nutrition-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(351px, 1fr));
+  gap: 17px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Box styling */
+.nutrition-box {
+  background: #1a1a1a;
+  border-radius: 58px;
+  padding: clamp(25px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.nutrition-box:hover {
+  transform: translateY(-3px);
+}
+
+/* Text alignment variations */
+.nutrition-eat,
+.nutrition-smart {
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.nutrition-eat .text,
+.nutrition-smart .text {
+  width: 70%;
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+.thunder {
+  background-image: url("assets/thunder-icon.png");
+}
+
+.plate {
+  background-image: url("assets/plate-icon.png");
+}
+
+/* Hover animation */
+.icon:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Graph box */
+.macro-graph {
+  width: 100%;
+  max-width: 200px;
+  margin: 20px 0;
+}
+
+.macro-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.macro-btn {
+  background: none;
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.macro-label small {
+  display: block;
+  font-size: 0.8rem;
+  color: gray;
+}
+
+/* Responsive mobile layout */
+@media (max-width: 768px) {
+  .nutrition-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nutrition-box {
+    width: 60%;
+    text-align: center;
+  }
+
+  .nutrition-eat,
+  .nutrition-smart {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nutrition-eat .text,
+  .nutrition-smart .text {
+    width: 100%;
+  }
+}
+/* =========================
+   FACTS & FAQS - Layout
+   ========================= */
+#facts-faqs {
+  width: 100%;
+  background: var(--clr-main);
+  color: var(--clr-tertiary);
+  padding: 6rem 0 4rem; /* plenty of vertical breathing room */
+  position: relative;
+}
+
+#facts-faqs h3{
+  text-transform: uppercase;
+}
+
+
+/* header */
+#facts-faqs .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* container that holds items in order */
+#facts-faqs .qa-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 4vw, 5rem); /* vertical spacing between items */
+  align-items: stretch;
+}
+
+/* the item (shared base) */
+#facts-faqs .qa-item {
+  width: 960px;                 /* visual width of card on desktop */
+  max-width: calc(100% - 80px);
+  height: 100px;
+  min-height: 80px;
+  background: #151619;         /* default fill */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 72px;             /* room for text and arrow */
+  box-sizing: border-box;
+  border-radius: 50px;         /* rounded edges by default */
+  /* Lock box-model: do not animate width/transform to prevent layout shifts. */
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  overflow: visible;
+  margin-left: 0;              /* default; overridden below for alignment */
+}
+
+/* the arrow inside each item (positioned near edge) */
+#facts-faqs .qa-item .qa-arrow {
+  width: 18px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.95;
+  pointer-events: none; /* arrow not intercepting clicks */
+}
+
+/* question text */
+#facts-faqs .qa-item .qa-text {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: 1.125rem; /* desktop ~24px */
+  text-align: left;
+  font-weight: 500;
+}
+
+/* hidden/expanded answer (kept for future JS toggling) */
+#facts-faqs .qa-item .qa-answer {
+  display: none;
+  font-size: 0.95rem;
+  color: #e5e5e5;
+  margin-left: 0;
+}
+
+/* ========== Alternating alignment ==========
+   Fact items aligned to left edge of viewport.
+   FAQ items aligned to right edge of viewport.
+   We put them outside the container by using auto margins.
+=============================================*/
+
+/* FACT (left-aligned) */
+#facts-faqs .qa-item.fact {
+  margin-left: clamp(32px, 3vw, 0);  /* aligns near left page edge (not the centered container) */
+  margin-right: auto;
+  border-radius: 0 50px 50px 0;         /* rounded on right edge */
+  transform-origin: left;
+}
+#facts-faqs .qa-item.fact .qa-arrow {
+  right: 18px; /* arrow near right edge */
+}
+#facts-faqs .qa-item.fact .qa-text {
+  text-align: right;   /* spec: fact text is right-aligned with a little gap */
+  padding-right: 48px;
+}
+
+/* FAQ (right-aligned) */
+#facts-faqs .qa-item.faq {
+  margin-left: auto;
+  margin-right: clamp(32px, 3vw, 0); /* aligns near right page edge */
+  border-radius: 50px 0 0 50px;         /* rounded on left edge */
+  transform-origin: right;
+}
+#facts-faqs .qa-item.faq .qa-arrow {
+  left: 18px; /* arrow near left edge */
+}
+#facts-faqs .qa-item.faq .qa-text {
+  text-align: left;   /* spec: faq text is left-aligned with a little gap */
+  padding-left: 48px;
+}
+
+
+/* Clicked state: change only colors/text, never box-model properties */
+#facts-faqs .qa-item.clicked {
+  background-color: var(--clr-secondary); /* visual feedback */
+  color: var(--clr-tertiary);
+  border-color: rgba(255,255,255,0.12);
+  /* do NOT change width, padding, margin, border-radius, box-sizing, or transform */
+}
+
+/* ========== Desktop-only: restore the previous subtle width/transform hover animation ========
+   This is applied only on wide screens so tablet/mobile won't experience layout shifts. */
+@media (min-width: 1101px) {
+  #facts-faqs .qa-item {
+    /* allow transform/width transitions on desktop only */
+    transition: transform 0.32s ease, width 0.32s ease, background-color 0.25s ease, color 0.25s ease;
+    overflow: visible;
+  }
+
+  /* subtle expansion on hover for desktop: preserves text layout but gives affordance */
+  #facts-faqs .qa-item.fact:hover,
+  #facts-faqs .qa-item.faq:hover {
+    transform: translateX(0); /* no shift in our layout because margins are set */
+    width: 55%;
+  }
+
+  #facts-faqs .qa-item.fact:hover { margin-left: 0; }
+  #facts-faqs .qa-item.faq:hover  { margin-right: 0; }
+}
+
+/* =========================
+   Tablet & Mobile: clicked state layout
+   Keep the box model locked but center content, normalize font-size and spacing when clicked
+   ============================================================================ */
+@media (max-width: 1024px) {
+  /* ensure clicked cards don't change dimensions but center text and control font sizes */
+  #facts-faqs .qa-item.clicked {
+    /* keep identical width/padding/border-radius as the non-clicked state in this breakpoint */
+    margin: 0 auto 20px auto;
+    border-radius: 32px;
+    padding: 24px 28px;
+    box-sizing: border-box;
+    min-height: 110px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* center the text block inside clicked mode and keep consistent typography */
+  #facts-faqs .qa-item.clicked .qa-text {
+    text-align: center !important;
+    padding: 0 12px;
+    width: 100%;
+    font-size: 1rem; /* normalized for tablet/mobile clicked state */
+    margin: 0;
+  }
+
+  /* hide arrows and prevent transform changes */
+  #facts-faqs .qa-item.clicked .qa-arrow { display: none !important; }
+  #facts-faqs .qa-item.clicked, #facts-faqs .qa-item.clicked:hover { transform: none !important; }
+}
+
+/* Smooth transition: handled in the main .qa-item declaration above */
+
+/* spacing for smaller screens and responsiveness */
+
+@media (max-width: 1024px) {
+  /* stack narrower, maintain left-right feel (but keep items inside viewport) */
+  #facts-faqs .qa-item { width: calc(100% - 56px); height: auto; padding: 18px 56px; min-height: 72px; }
+  #facts-faqs .qa-item.fact,
+  #facts-faqs .qa-item.faq {
+    margin-left: 28px;
+    margin-right: 28px;
+    border-radius: 28px;
+    transform-origin: center;
+  }
+  #facts-faqs .qa-item .qa-text { font-size: 0.95rem; text-align: left; padding: 0; }
+  #facts-faqs .qa-item .qa-arrow { display: none; } /* optional: hide arrows on very small screens */
+  #facts-faqs .qa-list { gap: 20px; }
+}
+
+#facts-faqs .question-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3.5rem;
+}
+#facts-faqs .question-form h3 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  margin-bottom: 1rem;
+}
+#facts-faqs .question-form .question-input {
+  width: 900px;
+  max-width: calc(100% - 64px);
+  height: 100px;
+  padding: 1rem 1.25rem;
+  border-radius: 27px;
+  background: #151619;
+  border: 1px solid rgba(255,255,255,0.31);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.18s ease;
+}
+#facts-faqs .question-form .question-input:focus {
+  border-color: rgba(255,255,255,1);
+}
+
+#facts-faqs .qa-item {
+  /* Enforce the same, non-sizing transition for any place that might re-declare it */
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+#facts-faqs .qa-item {
+  overflow: hidden;
+  position: relative;
+}
+
+#facts-faqs .qa-inner {
+  display: inline-block;
+  transform: scaleX(1);
+  transition: none;
+  width: 100%;
+}
+/* =========================
+   TABLET & MOBILE FIX: Facts & FAQs
+   ========================= */
+@media (max-width: 1024px) {
+  #facts-faqs .qa-item {
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 32px;
+    transform: none !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 32px;
+    box-sizing: border-box;
+    min-height: 80px;
+  }
+
+  #facts-faqs .qa-item:hover {
+    transform: none !important;
+    scale: 1 !important;
+  }
+
+  #facts-faqs .qa-item.active {
+    background-color: var(--clr-tertiary);
+    color: var(--clr-main);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transform: none !important;
+    width: 90%;
+  }
+  
+  #facts-faqs .qa-item.active .qa-text {
+    text-align: center !important;
+    width: 100%;
+    white-space: normal;
+    display: inline-block;
+  }
+  /* Keep same dimensions even when clicked */
+  #facts-faqs .qa-item.clicked {
+    transform: none !important;}
+    
+  /* Center text and hide arrows */
+  #facts-faqs .qa-item .qa-text {
+    text-align: center !important;
+    padding: 0 20px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  #facts-faqs .qa-item .qa-arrow {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1101px) {
+  /* Desktop: snappier hover/expand animation for QA items (more responsive) */
+  #facts-faqs .qa-item {
+    /* shorter duration + responsive easing for a snappy feel */
+    transition:
+      transform 180ms cubic-bezier(.22,.9,.32,1),
+      width 180ms cubic-bezier(.22,.9,.32,1),
+      background-color 160ms ease-out,
+      color 160ms ease-out;
+    will-change: transform, width;
+    backface-visibility: hidden;
+    /* GPU hint */
+    transform: translateZ(0);
+    overflow: visible;
+  }
+
+  /* subtle expansion on hover for desktop: preserves text layout but gives affordance */
+  #facts-faqs .qa-item.fact:hover,
+  #facts-faqs .qa-item.faq:hover {
+    transform: translateX(0); /* no shift in our layout because margins are set */
+    width: 55%;
+  }
+
+  #facts-faqs .qa-item.fact:hover { margin-left: 0; }
+  #facts-faqs .qa-item.faq:hover  { margin-right: 0; }
+}
+
+/* =========================
+   Additional tablet/mobile rules to ensure fact-item & faq-item (alternate markup)
+   center correctly when clicked/active on tablet & mobile.
+   This does not modify desktop rules.
+   ========================= */
+@media (max-width: 1024px) {
+  /* Treat .fact-item and .faq-item the same as .qa-item at these breakpoints */
+  #facts-faqs .fact-item,
+  #facts-faqs .faq-item {
+    width: 90%;
+    margin: 0 auto 16px auto;
+    border-radius: 32px;
+    transform: none !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px 32px;
+    box-sizing: border-box;
+    min-height: 72px;
+  }
+
+  /* Hide the arrow icon and make sure the text centers */
+  #facts-faqs .fact-item .arrow,
+  #facts-faqs .faq-item .arrow {
+    display: none !important;
+  }
+
+  /* Clicked/active presentation */
+  #facts-faqs .fact-item.clicked,
+  #facts-faqs .faq-item.clicked,
+  #facts-faqs .fact-item.active,
+  #facts-faqs .faq-item.active {
+    background-color: var(--clr-tertiary);
+    color: var(--clr-main);
+    border: 1px solid rgba(0,0,0,0.06);
+    width: 90%;
+    margin: 0 auto 20px auto;
+    padding: 22px 28px;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Ensure the text inside is centered and takes full width */
+  #facts-faqs .fact-item.clicked p,
+  #facts-faqs .faq-item.clicked p,
+  #facts-faqs .fact-item.active p,
+  #facts-faqs .faq-item.active p {
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    padding: 0 12px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+}
+
+/* Keep the existing mobile-specific behavior safe: this block reinforces centering even for very small viewports */
+@media (max-width: 414px) {
+  #facts-faqs .fact-item,
+  #facts-faqs .faq-item,
+  #facts-faqs .qa-item {
+    width: 92%;
+    margin: 0 auto 12px auto;
+    padding: 14px 18px;
+    min-height: auto;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #facts-faqs .fact-item p,
+  #facts-faqs .faq-item p,
+  #facts-faqs .qa-item .qa-text {
+    width: 100%;
+    padding: 0 10px;
+    margin: 0;
+    text-align: center;
+  }
+
+  #facts-faqs .fact-item .arrow,
+  #facts-faqs .faq-item .arrow,
+  #facts-faqs .qa-item .qa-arrow {
+    display: none !important;
+  }
+
+  #facts-faqs .fact-item.clicked,
+  #facts-faqs .faq-item.clicked,
+  #facts-faqs .qa-item.clicked {
+    padding: 16px 16px;
+    margin: 0 auto 14px auto;
+    width: 92%;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Responsive improvements for #facts-faqs .question-form
+   - Targets both .question-input (if you add a class later) and the plain input element currently in the HTML.
+   - Only affects tablet/mobile via media queries; desktop is unchanged.
+*/
+#facts-faqs .question-form input,
+#facts-faqs .question-form .question-input {
+  /* keep desktop defaults defined earlier; this selector ensures the plain input gets styled */
+  width: 900px;
+  max-width: calc(100% - 64px);
+  height: 100px;
+  padding: 1rem 1.25rem;
+  border-radius: 27px;
+  background: #151619;
+  border: 1px solid rgba(255,255,255,0.31);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.18s ease;
+}
+
+/* Tablet: adjust form width and input sizing so it centers and scales nicely */
+@media (max-width: 1024px) {
+  #facts-faqs .question-form {
+    width: 90%;
+    max-width: 720px;
+    margin: 1.5rem auto 2rem auto;
+    padding: 0;
+    box-sizing: border-box;
+    align-items: center; /* center heading + input */
+  }
+
+  #facts-faqs .question-form h3 {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    margin-bottom: 0.75rem;
+    text-align: center;
+    padding: 0 6px;
+    width: 100%;
+  }
+
+  #facts-faqs .question-form input,
+  #facts-faqs .question-form .question-input {
+    width: 100%;
+    max-width: 100%;
+    height: 88px;
+    padding: 0.9rem 1rem;
+    border-radius: 24px;
+    font-size: 1rem;
+  }
+}
+
+/* Mobile: smaller height/padding, tighter radii so the control feels balanced on small screens */
+@media (max-width: 414px) {
+  #facts-faqs .question-form {
+    width: 92%;
+    max-width: 420px;
+    margin: 1rem auto 1.5rem auto;
+    padding: 0;
+    align-items: center;
+  }
+
+  #facts-faqs .question-form h3 {
+    font-size: clamp(1rem, 2.6vw, 1.1rem);
+    margin-bottom: 0.5rem;
+    padding: 0 4px;
+  }
+
+  #facts-faqs .question-form input,
+  #facts-faqs .question-form .question-input {
+    width: 100%;
+    max-width: 100%;
+    height: 64px;
+    padding: 0.6rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+  }
 }

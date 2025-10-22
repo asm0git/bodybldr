@@ -58,6 +58,16 @@ document.addEventListener("DOMContentLoaded", () => {
     cover.classList.add("dimmed");
   }
 
+  // Mirror behavior for training section
+  const training = document.querySelector('#training');
+  if (training) {
+    if (window.innerWidth >= 1025) {
+      training.addEventListener('mouseenter', () => training.classList.remove('dimmed'));
+      training.addEventListener('mouseleave', () => training.classList.add('dimmed'));
+      training.classList.add('dimmed');
+    }
+  }
+
   // Tablet/Mobile: opacity when scrolled out of view
   if (window.innerWidth < 1025) {
     window.addEventListener("scroll", () => {
@@ -66,6 +76,18 @@ document.addEventListener("DOMContentLoaded", () => {
         cover.classList.add("dimmed");
       } else {
         cover.classList.remove("dimmed");
+      }
+    });
+  }
+
+  // Tablet/Mobile: training dim on scroll / intersection
+  if (window.innerWidth < 1025 && training) {
+    window.addEventListener('scroll', () => {
+      const rect = training.getBoundingClientRect();
+      if (rect.top > window.innerHeight || rect.bottom < 0) {
+        training.classList.add('dimmed');
+      } else {
+        training.classList.remove('dimmed');
       }
     });
   }
@@ -94,3 +116,134 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(phase);
     });
 });
+
+let showingAlt = false;
+function toggleMessage() {
+  const text = document.getElementById('message-text');
+  showingAlt = !showingAlt;
+  text.textContent = showingAlt
+    ? "What you eat fuels your progress, recovery, and results."
+    : "Your body is built in the gym – but shaped in the kitchen.";
+}
+
+const lists = {
+  protein: [
+    "Chicken breast",
+    "Eggs",
+    "Fish (tuna, salmon)",
+    "Lean beef",
+    "Greek yogurt"
+  ],
+  carbs: [
+    "Rice", "Oats", "Sweet potatoes", "Whole-grain bread", "Bananas"
+  ],
+  fats: [
+    "Avocado", "Olive oil", "Nuts", "Peanut butter", "Chia seeds"
+  ]
+};
+
+function toggleList(type) {
+  const el = document.getElementById(`${type}-text`);
+  if (el.dataset.toggled === "true") {
+    el.innerHTML = el.dataset.original;
+    el.dataset.toggled = "false";
+  } else {
+    el.dataset.original = el.innerHTML;
+    el.innerHTML = lists[type].join("<br>");
+    el.dataset.toggled = "true";
+  }
+}
+
+document.querySelectorAll("#facts-faqs .qa-item .qa-text").forEach(el => {
+  const inner = document.createElement("span");
+  inner.classList.add("qa-inner");
+  inner.textContent = el.textContent.trim();
+  el.textContent = "";
+  el.appendChild(inner);
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const qaItems = document.querySelectorAll("#facts-faqs .qa-item");
+
+  const contentMap = [
+    {
+      type: "fact",
+      default: "Skipping one workout ruins everything.",
+      clicked: "One missed day won’t matter. What counts is showing up again the next time.",
+    },
+    {
+      type: "faq",
+      default: "How often should I work out?",
+      clicked: "Start with 3–4 days a week, giving your muscles time to rest and recover between sessions.",
+    },
+    {
+      type: "fact",
+      default: "Lifting is only for men.",
+      clicked: "Strength training benefits everyone — it builds confidence, posture, and overall health.",
+    },
+    {
+      type: "faq",
+      default: "How long before I see progress?",
+      clicked: "Most beginners notice progress in 4–8 weeks — stay consistent and it will show.",
+    },
+    {
+      type: "fact",
+      default: "You should lose or gain weight before starting.",
+      clicked: "You can start training at any stage. Exercise helps your body adapt — whether you’re aiming to tone up, gain strength, or lose fat.",
+    },
+    {
+      type: "faq",
+      default: "Do I need supplements right away?",
+      clicked: "Not at all. Focus on real food, sleep, and consistency — supplements can come later.",
+    },
+  ];
+
+  qaItems.forEach((item, index) => {
+    const textEl = item.querySelector(".qa-text");
+    const arrowEl = item.querySelector(".qa-arrow img");
+    const data = contentMap[index];
+    let clicked = false;
+
+    item.addEventListener("click", () => {
+      clicked = !clicked;
+
+      // Freeze width to prevent reflow when hovered
+      if (clicked) {
+        const computedWidth = window.getComputedStyle(item).width;
+        item.style.width = computedWidth; // lock width
+      } else {
+        item.style.width = ""; // unlock width on revert
+      }
+
+      // Reset hover scaling
+      item.style.transform = "none";
+
+      if (clicked) {
+        // Invert colors and update text
+        item.style.backgroundColor = "var(--clr-tertiary)";
+        textEl.style.color = "var(--clr-main)";
+        if (arrowEl) arrowEl.style.filter = "invert(1)";
+        textEl.textContent = data.clicked;
+      } else {
+        // Revert to default
+        item.style.backgroundColor = "var(--clr-secondary)";
+        textEl.style.color = "var(--clr-tertiary)";
+        if (arrowEl) arrowEl.style.filter = "invert(0)";
+        textEl.textContent = data.default;
+      }
+    });
+  });
+});
+// Disable hover animation on smaller screens
+function disableHoverOnMobile() {
+  const qaItems = document.querySelectorAll("#facts-faqs .qa-item");
+  const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+  qaItems.forEach(item => {
+    if (isMobile) item.style.transform = "none";
+  });
+}
+
+window.addEventListener("resize", disableHoverOnMobile);
+window.addEventListener("load", disableHoverOnMobile);
+
