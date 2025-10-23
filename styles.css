@@ -829,7 +829,7 @@ body {
 }
 
 /*==============================
-  [2] TRAINING: TABLET VIEWPORT
+  [2] TRAINING: MOBILE VIEWPORT
 ==============================*/
 
 @media (max-width: 414px) {
@@ -1702,23 +1702,24 @@ body {
   }
 }
 
-/* Keep the existing mobile-specific behavior safe: this block reinforces centering even for very small viewports */
+/*==============================
+  [4] FACTS AND FAQS: MOBILE VIEWPORT
+==============================*/
 @media (max-width: 414px) {
   #facts-faqs .qa-list {
     align-items: center;
   }
 
-  /* Normalize card box and center horizontally */
+
   #facts-faqs .qa-item,
   #facts-faqs .qa-item.fact,
   #facts-faqs .qa-item.faq,
   #facts-faqs .qa-item.clicked {
-    width: min(92%, 640px) !important; /* override any inline width set by JS */
+    width: min(92%, 640px) !important; 
     max-width: 640px;
-    margin: 0 auto 12px auto !important; /* center */
-    padding: 16px 18px !important;       /* symmetric padding */
-    border-radius: 24px !important;      /* symmetric corners */
-    transform: none !important;          /* avoid any hover/shift */
+    margin: 0 auto 12px auto !important; 
+    padding: 16px 18px !important;       
+    transform: none !important;         
     left: auto !important;
     right: auto !important;
   }

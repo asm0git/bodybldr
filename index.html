@@ -246,27 +246,25 @@
         </div>
 
     <!-- Question Form -->
+        <div class="question-form">
+        <h5>Got more questions? Send them here!</h5>
+        <form id="question-form-element" novalidate>
+            <div class="form-row">
             <div class="form-field">
-            <label for="user-question" class="visually-hidden">Your question</label>
-            <textarea
-                id="user-question"
-                name="user-question"
-                class="question-input question-textarea"
-                placeholder="Type your question here..."
-                required
-                minlength="10"
-                maxlength="500"
-                title="Please enter at least 10 characters (max 500)"
-                aria-describedby="question-error"
-            ></textarea>
-            <span class="error-message" id="question-error" aria-live="polite"></span>
+                <input type="text" id="user-name" class="question-input" placeholder="Your name" aria-describedby="name-error" required>
+                <span class="error-message" id="name-error" aria-live="polite" role="alert"></span>
             </div>
-
-            <button type="submit" class="submit-btn">Send Question</button>
-
-            <div class="success-message" id="success-message" role="status" aria-live="polite" hidden>
-            Thank you! Your question has been submitted.
+            <div class="form-field">
+                <input type="email" id="user-email" class="question-input" placeholder="Your email" aria-describedby="email-error" required>
+                <span class="error-message" id="email-error" aria-live="polite" role="alert"></span>
             </div>
+            </div>
+            <div class="form-field">
+            <textarea id="user-question" class="question-input question-textarea" placeholder="Type your question here..." aria-describedby="question-error" required></textarea>
+            <span class="error-message" id="question-error" aria-live="polite" role="alert"></span>
+            </div>
+            <button type="button" id="submit-question-btn" class="submit-btn">Send Question</button>
+            <div class="success-message" id="success-message" role="status" aria-live="polite">Thank you! Your question has been submitted.</div>
         </form>
         </div>
 
