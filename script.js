@@ -4,66 +4,6 @@
 // Submitted to: Mr. Chris Almocera
 
 // ==========================================
-// NAVBAR ACTIVE LINK (Desktop): Scroll spy 
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
-  if (!navLinks.length) return;
-
-  const sections = navLinks
-    .map(a => (a.getAttribute("href") || "").trim())
-    .filter(href => href.startsWith("#"))
-    .map(href => document.querySelector(href))
-    .filter(Boolean);
-
-  if (!sections.length) return;
-
-  function setActive(id) {
-    navLinks.forEach(a => {
-      const href = a.getAttribute("href");
-      a.classList.toggle("active", href === `#${id}`);
-    });
-  }
-
-  function updateActiveByScroll() {
-    const vpCenter = window.innerHeight / 2;
-    let best = null;
-    let bestDist = Infinity;
-
-    for (const sec of sections) {
-      const rect = sec.getBoundingClientRect();
-      const secCenter = rect.top + rect.height / 2;
-      const dist = Math.abs(secCenter - vpCenter);
-      if (dist < bestDist) {
-        best = sec;
-        bestDist = dist;
-      }
-    }
-    if (best) setActive(best.id);
-  }
-
-  let ticking = false;
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        updateActiveByScroll();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-
-  updateActiveByScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", updateActiveByScroll, { passive: true });
-  navLinks.forEach(a => {
-    a.addEventListener("click", () => {
-      setTimeout(updateActiveByScroll, 100);
-    });
-  });
-});
-
-// ==========================================
 // COVER SECTION - Rotating quotes & images
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
@@ -285,9 +225,9 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('scroll', () => {
       const rect = factsFaqsSection.getBoundingClientRect();
       if (rect.top > window.innerHeight || rect.bottom < 0) {
-        factsFaqsSection.classList.add('dimmed');
+        factsFaqsSection.classList.add("dimmed");
       } else {
-        factsFaqsSection.classList.remove('dimmed');
+        factsFaqsSection.classList.remove("dimmed");
       }
     });
   }
@@ -393,7 +333,9 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateHeaderPositions, { passive: true });
 });
 
-// Form// Replace or insert this FORM VALIDATION section into script.js (keep other code intact)
+// ==========================================
+// FACTS & FAQS: Form validation
+// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("question-form-element");
   if (!form) return;
@@ -404,7 +346,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const successMessage = document.getElementById("success-message");
   const submitBtn = document.getElementById("submit-question-btn");
 
-  // helper: show error
   function showError(input, errorId, message) {
     const errorEl = document.getElementById(errorId);
     if (errorEl) {
@@ -416,8 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
       input.setAttribute("aria-invalid", "true");
     }
   }
-
-  // helper: clear single field error
+  
   function clearError(input, errorId) {
     const errorEl = document.getElementById(errorId);
     if (errorEl) {
@@ -537,4 +477,177 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     e.stopPropagation();
   });
+});
+
+// ==========================================
+// NAVBAR ACTIVE LINK (Desktop + Mobile Burger): Scroll spy + URL sync
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  // Helper to grab all nav links from both desktop and mobile menus
+  const getAllNavLinks = () =>
+    Array.from(document.querySelectorAll(".nav-links a, .mobile-nav-links a"));
+
+  // Sections are derived from desktop links that target in-page anchors
+  const desktopLinks = Array.from(document.querySelectorAll(".nav-links a"));
+  const sectionIds = desktopLinks
+    .map(a => (a.getAttribute("href") || "").trim())
+    .filter(href => href.startsWith("#"))
+    .map(href => href.slice(1));
+
+  const sections = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  function setActiveById(id) {
+    const allLinks = getAllNavLinks();
+    allLinks.forEach(a => {
+      const href = (a.getAttribute("href") || "").trim();
+      a.classList.toggle("active", href === `#${id}`);
+    });
+  }
+
+  function setActiveByLocation() {
+    const allLinks = getAllNavLinks();
+    const loc = window.location;
+    const curPath = new URL(loc.href).pathname.replace(/\/+$/, "");
+    const curHash = loc.hash;
+
+    allLinks.forEach(a => {
+      const url = new URL(a.href, loc.origin);
+      const aPath = url.pathname.replace(/\/+$/, "");
+      const aHash = url.hash;
+
+      // If link has a hash, prefer hash match; else match by path
+      const isActive = aHash ? (aHash === curHash && (!aPath || aPath === curPath)) : (aPath === curPath);
+      a.classList.toggle("active", isActive);
+    });
+  }
+
+  // Scroll-based active detection (for in-page sections)
+  function updateActiveByScroll() {
+    if (!sections.length) {
+      setActiveByLocation();
+      return;
+    }
+    const vpCenter = window.innerHeight / 2;
+    let best = null;
+    let bestDist = Infinity;
+
+    for (const sec of sections) {
+      const rect = sec.getBoundingClientRect();
+      const secCenter = rect.top + rect.height / 2;
+      const dist = Math.abs(secCenter - vpCenter);
+      if (dist < bestDist) {
+        best = sec;
+        bestDist = dist;
+      }
+    }
+    if (best) setActiveById(best.id);
+  }
+
+  // Expose for use by burger block after it clones links
+  window.__updateActiveByScroll = updateActiveByScroll;
+  window.__setActiveByLocation = setActiveByLocation;
+
+  // Init + listeners
+  updateActiveByScroll(); // handles both section and non-section pages
+
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateActiveByScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", updateActiveByScroll, { passive: true });
+  window.addEventListener("hashchange", () => {
+    // Sync active state on hash navigation (e.g., clicking anchor links)
+    updateActiveByScroll();
+  }, { passive: true });
+
+  // Delegate: after any nav link is clicked (desktop or mobile), re-evaluate once scroll settles
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest(".nav-links a, .mobile-nav-links a");
+    if (!a) return;
+    setTimeout(updateActiveByScroll, 120);
+  });
+});
+
+// ==========================================
+// Mobile Burger Menu (<=414px) - non-intrusive, with active syncing
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.querySelector(".burger-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const desktopLinks = document.querySelector(".nav-links");
+
+  if (!burger || !mobileMenu || !desktopLinks) return;
+
+  // Build mobile list by cloning existing nav links (no duplication to maintain)
+  function ensureMobileList() {
+    if (mobileMenu.querySelector(".mobile-nav-links")) return;
+    const clone = desktopLinks.cloneNode(true);
+    clone.classList.remove("nav-links");
+    clone.classList.add("mobile-nav-links");
+    mobileMenu.innerHTML = "";
+    mobileMenu.appendChild(clone);
+
+    // Close menu when a mobile link is clicked
+    clone.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", closeMenu, { passive: true });
+    });
+
+    // Sync active state for the newly created links
+    if (window.__updateActiveByScroll) window.__updateActiveByScroll();
+    if (window.__setActiveByLocation) window.__setActiveByLocation();
+  }
+
+  function openMenu() {
+    ensureMobileList();
+    burger.setAttribute("aria-expanded", "true");
+    mobileMenu.classList.add("open");
+    mobileMenu.removeAttribute("hidden");
+    mobileMenu.setAttribute("aria-hidden", "false");
+    document.body.classList.add("menu-open");
+
+    // Re-sync active state right after opening
+    if (window.__updateActiveByScroll) window.__updateActiveByScroll();
+  }
+
+  function closeMenu() {
+    burger.setAttribute("aria-expanded", "false");
+    mobileMenu.classList.remove("open");
+    mobileMenu.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("menu-open");
+  }
+
+  function toggleMenu() {
+    const expanded = burger.getAttribute("aria-expanded") === "true";
+    expanded ? closeMenu() : openMenu();
+  }
+
+  // Toggle on button
+  burger.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleMenu();
+  });
+
+  // Close when clicking outside list area
+  mobileMenu.addEventListener("click", (e) => {
+    if (e.target === mobileMenu) closeMenu();
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  // Defensive: close menu if resizing above mobile
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 414) closeMenu();
+  }, { passive: true });
 });
