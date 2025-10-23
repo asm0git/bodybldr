@@ -14,7 +14,6 @@
   --clr-main: #0A0A0D;
   --clr-secondary: #151619;
   --clr-tertiary: #FFFFFF;
-  /* navbar height used to calculate cover height so cover never exceeds viewport */
   --nav-h: 90px;
   --cover-title-size: clamp(1.5rem, 8vw, 6rem);
   --cover-subtitle-size: clamp(0.875rem, 2vw, 1.5rem);
@@ -63,9 +62,7 @@ body {
   padding: 0 2rem;
 }
 
-/*==============================
-  TYPOGRAPHY
-==============================*/
+
 /*==============================
   TYPOGRAPHY - GLOBAL CONSISTENCY
 ==============================*/
@@ -134,9 +131,9 @@ h3 {
 }
 
 
-/*==============================
-  NAVBAR
-==============================*/
+/*==============================================================================================================================
+                                                            NAVBAR
+==============================================================================================================================*/
 .navbar {
   position: fixed; /* changed from sticky to fixed */
   top: 0;
@@ -153,9 +150,8 @@ h3 {
   border-bottom: 2px solid var(--clr-secondary);
 }
 
-/* Add padding to body to prevent content from hiding under navbar */
 body {
-  padding-top: 90px; /* matches navbar height */
+  padding-top: 90px; 
 }
 
 .nav-links {
@@ -241,13 +237,12 @@ body {
     padding-top: 50px;
   }
 }
-/*==============================
-  COVER SECTION
-==============================*/
+/*==============================================================================================================================
+                                                            [1] COVER
+==============================================================================================================================*/
 #cover {
   position: relative;
   width: 100%;
-  /* make cover height fit the viewport minus the navbar so it won't create vertical overflow */
   min-height: calc(100vh - var(--nav-h));
   max-height: 950px;
   overflow: hidden;
@@ -289,7 +284,6 @@ body {
   );
 }
 
-/* NEW: Bottom fade gradient for smooth transition */
 #cover::after {
   content: "";
   position: absolute;
@@ -387,7 +381,7 @@ body {
 }
 
 /*==============================
-  TABLET
+  [1] COVER: TABLET VIEWPORT
 ==============================*/
 @media (max-width: 1024px) {
   #cover {
@@ -455,6 +449,9 @@ body {
   }
 }
 
+/*==============================
+  [1] COVER: MOBILE VIEWPORT
+==============================*/
 
 @media (max-width: 414px) {
   #cover {
@@ -505,11 +502,11 @@ body {
     bottom: 0;
   }
 }
-/* ================================
-   TRAINING SECTION (updated with phase lines restored)
-   ================================= */
 
-/* Section wrapper + dim behavior */
+/*==============================================================================================================================
+                                                        [2] TRAINING SECTION
+==============================================================================================================================*/
+
 #training {
   position: relative;
   width: 100%;
@@ -543,6 +540,7 @@ body {
   margin-bottom: 80px;
   text-transform: uppercase;
 }
+
 .training-title {
   font-family: var(--font-main);
   font-size: clamp(3rem, 6.15vw, 118px);
@@ -656,9 +654,8 @@ body {
 .phase-3 .phase-number { right: 0; }
 .phase-2 .phase-number { left: 0; }
 
-/* Connecting line - FIXED: always visible on desktop */
 .phase-line {
-  display: block; /* ensure it's visible */
+  display: block; 
   height: 2px;
   background-color: var(--clr-tertiary);
   transform: scaleX(0);
@@ -731,9 +728,10 @@ body {
 }
 .footer-tagline .italic { font-style: italic; font-weight: var(--fw-medium); }
 
-/* ========================
-   Tablet (≤1024px) - lines still visible
-   ======================== */
+/*==============================
+  [2] TRAINING: TABLET VIEWPORT
+==============================*/
+
 @media (max-width: 1024px) {
   .training-container {
     width: 70%;
@@ -760,8 +758,6 @@ body {
     border-radius: clamp(22px, 20%, 80px);
   }
 
-  /* Lines still visible on tablet */
-
   .phase-content {
     grid-template-rows: var(--phase-number-clearance) 1fr auto;
     row-gap: clamp(6px, 1vw, 10px);
@@ -775,9 +771,10 @@ body {
   .footer-tagline { font-size: clamp(0.875rem, 1.95vw, 20px); }
 }
 
-/* ========================
-   Mobile (≤414px) - hide lines for stacked layout
-   ======================== */
+/*==============================
+  [2] TRAINING: TABLET VIEWPORT
+==============================*/
+
 @media (max-width: 414px) {
   .training-phase {
     display: flex;
@@ -840,9 +837,9 @@ body {
   .phase-line { display: none !important; }
 }
 
-/* =========================
-   NUTRITION SECTION
-   ========================= */
+/*==============================================================================================================================
+                                                        [3] NUTRITION SECTION
+==============================================================================================================================*/
 
 /* Section wrapper */
 .nutrition-section {
@@ -857,7 +854,6 @@ body {
   overflow: hidden;
 }
 
-/* Add dim transition and initial state for nutrition section */
 .nutrition-section {
   position: relative;
   display: flex;
@@ -868,14 +864,13 @@ body {
   padding: 60px 0;
   width: 100%;
   overflow: hidden;
-  transition: opacity 0.5s ease; /* smooth dim transition */
+  transition: opacity 0.5s ease; 
 }
 
 .nutrition-section.dimmed {
-  opacity: 0.25; /* matches cover dimmed opacity */
+  opacity: 0.25; 
 }
 
-/* Base container (desktop gutters override below) */
 .nutrition-container {
   width: 100%;
   margin: 0 auto;
@@ -883,7 +878,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Desktop gutter behavior */
 @media (min-width: 1152px) {
   .nutrition-container { width: 1152px; max-width: 1152px; }
 }
@@ -891,7 +885,6 @@ body {
   .nutrition-container { width: 1024px; max-width: 1024px; }
 }
 
-/* Header */
 .nutrition-header { text-align: center; margin-bottom: 40px; }
 .nutrition-title {
   font-family: var(--font-main);
@@ -902,6 +895,7 @@ body {
   line-height: 1;
   margin: 0 0 10px 0;
 }
+
 .nutrition-subtitle {
   font-family: var(--font-main);
   font-size: clamp(14px, 2.93vw, 44px);
@@ -968,6 +962,7 @@ body {
   padding: 0 5%;
   box-sizing: border-box;
 }
+
 .macro-description,
 .nutrition-macro-container p {
   font-family: 'Montserrat', sans-serif;
@@ -990,6 +985,7 @@ body {
   object-fit: cover;
   transition: opacity 200ms ease;
 }
+
 /* Macro arrows & selection */
 .macro-text-container {
   display: flex;
@@ -1001,9 +997,27 @@ body {
   box-sizing: border-box;
   flex-wrap: nowrap;
 }
-.macro-text-group { display: flex; flex-direction: column; align-items: center; min-width: 0; flex: 1 1 auto; }
-.macro-text-selection { font-size: clamp(14px, 1.5vw, 20px); font-weight: 700; line-height: 1.2; transition: opacity 200ms ease; }
-.macro-subtext { font-size: clamp(11px, 1vw, 14px); color: #ccc; margin-top: 6px; line-height: 1.2; }
+
+.macro-text-group { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: 
+  center; 
+  min-width: 0; 
+  flex: 1 1 auto; }
+
+.macro-text-selection { 
+  font-size: clamp(14px, 1.5vw, 20px); 
+  font-weight: 700; 
+  line-height: 1.2; 
+  transition: opacity 200ms ease; }
+
+.macro-subtext { 
+  font-size: clamp(11px, 1vw, 14px); 
+  color: #ccc; 
+  margin-top: 6px; 
+  line-height: 1.2; }
+
 .arrow { 
   width: clamp(24px, 2.8vw, 32px); 
   height: clamp(24px, 2.8vw, 32px); 
@@ -1011,7 +1025,10 @@ body {
   cursor: pointer;
   transition: transform 180ms ease, opacity 180ms ease;
 }
-.arrow:hover { transform: scale(1.1); opacity: 0.8; }
+
+.arrow:hover { 
+  transform: scale(1.1); 
+  opacity: 0.8; }
 
 /* Right: Eat/Smart cards (grid: text | image) */
 .nutrition-right {
@@ -1023,6 +1040,7 @@ body {
   box-sizing: border-box;
   min-width: 0;
 }
+
 .nutrition-eat-container,
 .nutrition-smart-container {
   display: grid;
@@ -1042,7 +1060,8 @@ body {
 
 /* Simple hover: subtle lift + shadow */
 .nutrition-eat-container:hover,
-.nutrition-smart-container:hover {
+.nutrition-smart-container:hover, 
+.nutrition-macro-container:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
@@ -1054,6 +1073,7 @@ body {
   grid-column: 1;
   justify-self: stretch;
 }
+
 .nutrition-eat-titles,
 .nutrition-smart-titles {
   font-family: 'Montserrat', sans-serif;
@@ -1063,6 +1083,7 @@ body {
   line-height: 1.1;
   margin: 0 0 clamp(4px, 0.6vw, 8px) 0;
 }
+
 .nutrition-eat-subtitles,
 .nutrition-smart-subtitles {
   font-family: 'Montserrat', sans-serif;
@@ -1072,19 +1093,27 @@ body {
   margin: 0;
 }
 
-/* Image: absolute-centered in the card's right side */
 .nutrition-eat-container img,
 .nutrition-smart-container img {
   position: absolute;
-  right: 60px;
+  right: 0%;
   top: 50%;
-  transform: translate(0, -50%);
-  width: 189px;
-  height: 189px;
+  transform: translate(20%, -50%);
+  width: 40%;
+  height: 40%;
   object-fit: contain;
   pointer-events: none;
   z-index: 1;
   transition: transform 180ms ease;
+}
+
+@media (min-width: 1025px){
+  .nutrition-eat-container img,
+  .nutrition-smart-container img{
+    width: 160px;
+    height: 160px;
+    right: 10%;
+  }
 }
 
 /* Simple image hover: slight scale */
@@ -1110,6 +1139,7 @@ body {
   margin-top: 15px;
   box-sizing: border-box;
 }
+
 .nutrition-food-choice { width: 100%; min-width: 0; }
 .nutrition-food-choice-container {
   background: rgba(21, 22, 25, 1);
@@ -1133,6 +1163,7 @@ body {
   box-shadow: 0 10px 24px rgba(0,0,0,0.25);
   background: rgba(30, 31, 35, 1);
 }
+
 .nutrition-food-choice-titles,
 .nutrition-food-choice-titles-long {
   font-family: 'Montserrat', sans-serif;
@@ -1183,15 +1214,12 @@ body {
     padding: clamp(30px, 4vw, 40px) clamp(35px, 4.5vw, 45px);
     border-radius: clamp(60px, 9vw, 80px);
   }
-  .nutrition-eat-container img,
-  .nutrition-smart-container img {
-    right: 30px;
-    width: 130px;
-    height: 130px;
-  }
 }
 
-/* ===== ≤1024px ===== */
+/*==============================
+  [3] NUTRITION: TABLET VIEWPORT]
+==============================*/
+
 @media (max-width: 1024px) {
   .nutrition-container {
     width: 70%;
@@ -1224,22 +1252,11 @@ body {
   .nutrition-food-choice-container p { font-size: clamp(12px, 1.8vw, 15px); line-height: 1.35; }
 }
 
-/* ===== ≤768px ===== */
-@media (max-width: 768px) {
-  .nutrition-eat-container,
-  .nutrition-smart-container {
-    grid-template-columns: 1fr clamp(100px, 32%, 140px);
-    height: clamp(220px, 32vw, 260px);
-    padding: clamp(28px, 4.5vw, 35px) clamp(30px, 5vw, 40px);
-    border-radius: clamp(50px, 10vw, 70px);
-  }
-  .nutrition-eat-titles,
-  .nutrition-smart-titles { font-size: clamp(18px, 3.8vw, 28px); }
-  .nutrition-eat-subtitles,
-  .nutrition-smart-subtitles { font-size: clamp(12px, 2.2vw, 17px); line-height: 1.5; }
-}
 
-/* ===== ≤414px ===== */
+/*==============================
+  [3] NUTRITION: MOBILE VIEWPORT
+==============================*/
+
 @media (max-width: 414px) {
   .nutrition-container { width: 90%; padding: 30px 0; }
   .nutrition-eat-container,
@@ -1273,14 +1290,15 @@ body {
   .nutrition-food-choice-titles-long { font-size: clamp(18px, 5vw, 22px); }
   .nutrition-food-choice-container p { font-size: clamp(12px, 3.5vw, 14px); line-height: 1.35; }
 }
-/* =========================
-   FACTS & FAQS - Layout
-   ========================= */
+
+/*==============================================================================================================================
+                                                        [4] FACTS AND FAQS
+==============================================================================================================================*/
 #facts-faqs {
   width: 100%;
   background: var(--clr-main);
   color: var(--clr-tertiary);
-  padding: 6rem 0 4rem; /* plenty of vertical breathing room */
+  padding: 6rem 0 4rem; 
   position: relative;
 }
 
@@ -1294,14 +1312,13 @@ body {
   color: var(--clr-tertiary);
   padding: 6rem 0 4rem;
   position: relative;
-  transition: opacity 0.5s ease; /* smooth dim transition */
+  transition: opacity 0.5s ease; 
 }
 
 #facts-faqs.dimmed {
-  opacity: 0.25; /* matches cover and nutrition dimmed opacity */
+  opacity: 0.25; 
 }
 
-/* header */
 #facts-faqs .section-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -1312,24 +1329,24 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(2.5rem, 4vw, 5rem); /* vertical spacing between items */
+  gap: clamp(2.5rem, 4vw, 2rem); 
   align-items: stretch;
 }
 
-/* the item (shared base) */
+
 #facts-faqs .qa-item {
-  width: 960px;                 /* visual width of card on desktop */
+  width: 960px;               
   max-width: calc(100% - 80px);
   height: 100px;
   min-height: 80px;
-  background: #151619;         /* default fill */
+  background: #151619;         
   color: #fff;
   display: flex;
   align-items: center;
   position: relative;
-  padding: 0 72px;             /* room for text and arrow */
+  padding: 0 72px;            
   box-sizing: border-box;
-  border-radius: 50px;         /* rounded edges by default */
+  border-radius: 50px;         
   /* Lock box-model: do not animate width/transform to prevent layout shifts. */
   transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
   overflow: visible;
@@ -1344,7 +1361,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   opacity: 0.95;
-  pointer-events: none; /* arrow not intercepting clicks */
+  pointer-events: none; 
 }
 
 /* question text */
@@ -1364,15 +1381,10 @@ body {
   margin-left: 0;
 }
 
-/* ========== Alternating alignment ==========
-   Fact items aligned to left edge of viewport.
-   FAQ items aligned to right edge of viewport.
-   We put them outside the container by using auto margins.
-=============================================*/
 
 /* FACT (left-aligned) */
 #facts-faqs .qa-item.fact {
-  margin-left: clamp(32px, 3vw, 0);  /* aligns near left page edge (not the centered container) */
+  margin-left: clamp(32px, 3vw, 0); 
   margin-right: auto;
   border-radius: 0 50px 50px 0;         /* rounded on right edge */
   transform-origin: left;
@@ -1381,7 +1393,7 @@ body {
   right: 18px; /* arrow near right edge */
 }
 #facts-faqs .qa-item.fact .qa-text {
-  text-align: right;   /* spec: fact text is right-aligned with a little gap */
+  text-align: right;  
   padding-right: 48px;
 }
 
@@ -1392,6 +1404,7 @@ body {
   border-radius: 50px 0 0 50px;         /* rounded on left edge */
   transform-origin: right;
 }
+
 #facts-faqs .qa-item.faq .qa-arrow {
   left: 18px; /* arrow near left edge */
 }
@@ -1401,24 +1414,18 @@ body {
 }
 
 
-/* Clicked state: change only colors/text, never box-model properties */
 #facts-faqs .qa-item.clicked {
   background-color: var(--clr-secondary); /* visual feedback */
   color: var(--clr-tertiary);
   border-color: rgba(255,255,255,0.12);
-  /* do NOT change width, padding, margin, border-radius, box-sizing, or transform */
 }
 
-/* ========== Desktop-only: restore the previous subtle width/transform hover animation ========
-   This is applied only on wide screens so tablet/mobile won't experience layout shifts. */
 @media (min-width: 1025px) {
   #facts-faqs .qa-item {
-    /* allow transform/width transitions on desktop only */
     transition: transform 0.32s ease, width 0.32s ease, background-color 0.25s ease, color 0.25s ease;
     overflow: visible;
   }
 
-  /* subtle expansion on hover for desktop: preserves text layout but gives affordance */
   #facts-faqs .qa-item.fact:hover,
   #facts-faqs .qa-item.faq:hover {
     transform: translateX(0); /* no shift in our layout because margins are set */
@@ -1429,14 +1436,12 @@ body {
   #facts-faqs .qa-item.faq:hover  { margin-right: 0; }
 }
 
-/* =========================
-   Tablet & Mobile: clicked state layout
-   Keep the box model locked but center content, normalize font-size and spacing when clicked
-   ============================================================================ */
+/*==============================
+  [5] FAQS: TABLET VIEWPORT
+==============================*/
+
 @media (max-width: 1024px) {
-  /* ensure clicked cards don't change dimensions but center text and control font sizes */
   #facts-faqs .qa-item.clicked {
-    /* keep identical width/padding/border-radius as the non-clicked state in this breakpoint */
     margin: 0 auto 20px auto;
     border-radius: 32px;
     padding: 24px 28px;
@@ -1448,23 +1453,18 @@ body {
     justify-content: center;
   }
 
-  /* center the text block inside clicked mode and keep consistent typography */
   #facts-faqs .qa-item.clicked .qa-text {
     text-align: center !important;
     padding: 0 12px;
     width: 100%;
-    font-size: 1rem; /* normalized for tablet/mobile clicked state */
+    font-size: 1rem;
     margin: 0;
   }
 
-  /* hide arrows and prevent transform changes */
   #facts-faqs .qa-item.clicked .qa-arrow { display: none !important; }
   #facts-faqs .qa-item.clicked, #facts-faqs .qa-item.clicked:hover { transform: none !important; }
 }
 
-/* Smooth transition: handled in the main .qa-item declaration above */
-
-/* spacing for smaller screens and responsiveness */
 
 @media (max-width: 1024px) {
   /* stack narrower, maintain left-right feel (but keep items inside viewport) */
@@ -1487,6 +1487,7 @@ body {
   align-items: center;
   margin-top: 3.5rem;
 }
+
 #facts-faqs .question-form h5 {
   font-size: clamp(1.25rem, 2vw, 1.5rem);
   margin-bottom: 1rem;
@@ -1506,12 +1507,12 @@ body {
   box-sizing: border-box;
   transition: border-color 0.18s ease;
 }
+
 #facts-faqs .question-form .question-input:focus {
   border-color: rgba(255,255,255,1);
 }
 
 #facts-faqs .qa-item {
-  /* Enforce the same, non-sizing transition for any place that might re-declare it */
   transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
@@ -1527,7 +1528,7 @@ body {
   width: 100%;
 }
 /* =========================
-   TABLET & MOBILE FIX: Facts & FAQs
+   di ko na kaya ayusin to kaya in-ai ko nalang sorry po sir kung makita nyo po to at sabog sabog po code rito basta gumana lang
    ========================= */
 @media (max-width: 1024px) {
   #facts-faqs .qa-item {
@@ -1564,11 +1565,11 @@ body {
     white-space: normal;
     display: inline-block;
   }
-  /* Keep same dimensions even when clicked */
+  
   #facts-faqs .qa-item.clicked {
     transform: none !important;}
     
-  /* Center text and hide arrows */
+  
   #facts-faqs .qa-item .qa-text {
     text-align: center !important;
     padding: 0 20px;
@@ -1582,9 +1583,7 @@ body {
 }
 
 @media (min-width: 1025px) {
-  /* Desktop: snappier hover/expand animation for QA items (more responsive) */
   #facts-faqs .qa-item {
-    /* shorter duration + responsive easing for a snappy feel */
     transition:
       transform 180ms cubic-bezier(.22,.9,.32,1),
       width 180ms cubic-bezier(.22,.9,.32,1),
@@ -1592,15 +1591,13 @@ body {
       color 160ms ease-out;
     will-change: transform, width;
     backface-visibility: hidden;
-    /* GPU hint */
     transform: translateZ(0);
     overflow: visible;
   }
 
-  /* subtle expansion on hover for desktop: preserves text layout but gives affordance */
   #facts-faqs .qa-item.fact:hover,
   #facts-faqs .qa-item.faq:hover {
-    transform: translateX(0); /* no shift in our layout because margins are set */
+    transform: translateX(0); 
     width: 55%;
   }
 
@@ -1608,29 +1605,8 @@ body {
   #facts-faqs .qa-item.faq:hover  { margin-right: 0; }
 }
 
-/* =========================
-   Additional tablet/mobile rules to ensure fact-item & faq-item (alternate markup)
-   center correctly when clicked/active on tablet & mobile.
-   This does not modify desktop rules.
-   ========================= */
-@media (max-width: 1024px) {
-  /* Treat .fact-item and .faq-item the same as .qa-item at these breakpoints */
-  #facts-faqs .fact-item,
-  #facts-faqs .faq-item {
-    width: 90%;
-    margin: 0 auto 16px auto;
-    border-radius: 32px;
-    transform: none !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 18px 32px;
-    box-sizing: border-box;
-    min-height: 72px;
-  }
 
+@media (max-width: 1024px) {
   /* Hide the arrow icon and make sure the text centers */
   #facts-faqs .fact-item .arrow,
   #facts-faqs .faq-item .arrow {
@@ -1714,10 +1690,6 @@ body {
   }
 }
 
-/* Responsive improvements for #facts-faqs .question-form
-   - Targets both .question-input (if you add a class later) and the plain input element currently in the HTML.
-   - Only affects tablet/mobile via media queries; desktop is unchanged.
-*/
 #facts-faqs .question-form input,
 #facts-faqs .question-form .question-input {
   /* keep desktop defaults defined earlier; this selector ensures the plain input gets styled */
@@ -1735,7 +1707,6 @@ body {
   transition: border-color 0.18s ease;
 }
 
-/* Tablet: adjust form width and input sizing so it centers and scales nicely */
 @media (max-width: 1024px) {
   #facts-faqs .question-form {
     width: 90%;
@@ -1765,7 +1736,6 @@ body {
   }
 }
 
-/* Mobile: smaller height/padding, tighter radii so the control feels balanced on small screens */
 @media (max-width: 414px) {
   #facts-faqs .question-form {
     width: 92%;
@@ -1792,119 +1762,10 @@ body {
   }
 }
 
-/* =========================================
-   Global heading consistency across sections
-   - h3 (Training, Nutrition, Facts & FAQs):
-     Desktop 120px, Tablet 85px, Mobile 36px
-     Uppercase, Montserrat Black
-   - h4 (subtitles):
-     Desktop 44px, Tablet 32px, Mobile 14px
-     Italic
-   - Tight spacing between h3 and the following subtitle
-   ========================================= */
 
-/* Base (Desktop ≥1025px) */
-@media (min-width: 1025px) {
-  /* h3 section titles */
-  .training-header .training-title,
-  .nutrition-header .nutrition-title,
-  #facts-faqs .section-header h3 {
-    font-family: var(--font-main);
-    font-weight: var(--fw-black);
-    text-transform: uppercase;
-    font-size: 120px;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    margin: 0;
-  }
-
-  /* h4 subtitles (and Nutrition subtitle <p> styled to match) */
-  .training-header .training-subtitle,
-  #facts-faqs .section-header h4,
-  .nutrition-header .nutrition-subtitle {
-    font-family: var(--font-main);
-    font-size: 44px;
-    font-style: italic;
-    font-weight: var(--fw-medium);
-    line-height: 1.15;
-    margin: 0;
-  }
-
-  /* Tight spacing between h3 and the subtitle right after it */
-  .training-header .training-title + .training-subtitle,
-  .nutrition-header .nutrition-title + .nutrition-subtitle,
-  #facts-faqs .section-header h3 + h4 {
-    margin-top: clamp(4px, 0.4vw, 8px);
-  }
-}
-
-/* Tablet (415px–1024px) */
-@media (min-width: 415px) and (max-width: 1024px) {
-  .training-header .training-title,
-  .nutrition-header .nutrition-title,
-  #facts-faqs .section-header h3 {
-    font-family: var(--font-main);
-    font-weight: var(--fw-black);
-    text-transform: uppercase;
-    font-size: 85px;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    margin: 0;
-  }
-
-  .training-header .training-subtitle,
-  #facts-faqs .section-header h4,
-  .nutrition-header .nutrition-subtitle {
-    font-family: var(--font-main);
-    font-size: 32px;
-    font-style: italic;
-    font-weight: var(--fw-medium);
-    line-height: 1.15;
-    margin: 0;
-  }
-
-  .training-header .training-title + .training-subtitle,
-  .nutrition-header .nutrition-title + .nutrition-subtitle,
-  #facts-faqs .section-header h3 + h4 {
-    margin-top: clamp(4px, 0.6vw, 10px);
-  }
-}
-
-/* Mobile (≤414px) */
-@media (max-width: 414px) {
-  .training-header .training-title,
-  .nutrition-header .nutrition-title,
-  #facts-faqs .section-header h3 {
-    font-family: var(--font-main);
-    font-weight: var(--fw-black);
-    text-transform: uppercase;
-    font-size: 36px;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    margin: 0;
-  }
-
-  .training-header .training-subtitle,
-  #facts-faqs .section-header h4,
-  .nutrition-header .nutrition-subtitle {
-    font-family: var(--font-main);
-    font-size: 14px;
-    font-style: italic;
-    font-weight: var(--fw-medium);
-    line-height: 1.2;
-    margin: 0;
-  }
-
-  .training-header .training-title + .training-subtitle,
-  .nutrition-header .nutrition-title + .nutrition-subtitle,
-  #facts-faqs .section-header h3 + h4 {
-    margin-top: 6px; /* tight but readable on small screens */
-  }
-}
-
-/* =========================
-   FOOTER
-   ========================= */
+/*==============================================================================================================================
+                                                        FOOTER
+==============================================================================================================================*/
 .site-footer {
   width: 100%;
   background-color: var(--clr-secondary);
@@ -1993,8 +1854,76 @@ body {
   }
 }
 
+/*==============================================================================================================================
+                                                        ADDITIONAL OVERRIDE SETTINGS
+==============================================================================================================================*/
+
 /* Scroll animation for section headers */
 h3, h4 {
   transition: transform 0.1s linear;
   will-change: transform;
+}
+
+/* Tablet (415px–1024px) */
+@media (min-width: 415px) and (max-width: 1024px) {
+  .training-header .training-title,
+  .nutrition-header .nutrition-title,
+  #facts-faqs .section-header h3 {
+    font-family: var(--font-main);
+    font-weight: var(--fw-black);
+    text-transform: uppercase;
+    font-size: 85px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .training-header .training-subtitle,
+  #facts-faqs .section-header h4,
+  .nutrition-header .nutrition-subtitle {
+    font-family: var(--font-main);
+    font-size: 32px;
+    font-style: italic;
+    font-weight: var(--fw-medium);
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .training-header .training-title + .training-subtitle,
+  .nutrition-header .nutrition-title + .nutrition-subtitle,
+  #facts-faqs .section-header h3 + h4 {
+    margin-top: clamp(4px, 0.6vw, 10px);
+  }
+}
+
+/* Mobile (≤414px) */
+@media (max-width: 414px) {
+  .training-header .training-title,
+  .nutrition-header .nutrition-title,
+  #facts-faqs .section-header h3 {
+    font-family: var(--font-main);
+    font-weight: var(--fw-black);
+    text-transform: uppercase;
+    font-size: 36px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .training-header .training-subtitle,
+  #facts-faqs .section-header h4,
+  .nutrition-header .nutrition-subtitle {
+    font-family: var(--font-main);
+    font-size: 14px;
+    font-style: italic;
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .training-header .training-title + .training-subtitle,
+  .nutrition-header .nutrition-title + .nutrition-subtitle,
+  #facts-faqs .section-header h3 + h4 {
+    margin-top: 6px; /* tight but readable on small screens */
+  }
 }
