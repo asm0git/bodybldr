@@ -1704,48 +1704,39 @@ body {
 
 /* Keep the existing mobile-specific behavior safe: this block reinforces centering even for very small viewports */
 @media (max-width: 414px) {
-  #facts-faqs .fact-item,
-  #facts-faqs .faq-item,
-  #facts-faqs .qa-item {
-    width: 92%;
-    margin: 0 auto 12px auto;
-    padding: 14px 18px;
-    min-height: auto;
-    border-radius: 24px;
-    display: flex;
+  #facts-faqs .qa-list {
     align-items: center;
-    justify-content: center;
-    text-align: center;
   }
 
-  #facts-faqs .fact-item p,
-  #facts-faqs .faq-item p,
+  /* Normalize card box and center horizontally */
+  #facts-faqs .qa-item,
+  #facts-faqs .qa-item.fact,
+  #facts-faqs .qa-item.faq,
+  #facts-faqs .qa-item.clicked {
+    width: min(92%, 640px) !important; /* override any inline width set by JS */
+    max-width: 640px;
+    margin: 0 auto 12px auto !important; /* center */
+    padding: 16px 18px !important;       /* symmetric padding */
+    border-radius: 24px !important;      /* symmetric corners */
+    transform: none !important;          /* avoid any hover/shift */
+    left: auto !important;
+    right: auto !important;
+  }
+
+  /* Center the text, remove side padding offsets from desktop styles */
   #facts-faqs .qa-item .qa-text {
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 auto;
     width: 100%;
-    padding: 0 10px;
-    margin: 0;
-    text-align: center;
   }
 
-  #facts-faqs .fact-item .arrow,
-  #facts-faqs .faq-item .arrow,
+  /* Hide arrows on mobile for perfect centering */
   #facts-faqs .qa-item .qa-arrow {
     display: none !important;
   }
-
-  #facts-faqs .fact-item.clicked,
-  #facts-faqs .faq-item.clicked,
-  #facts-faqs .qa-item.clicked {
-    padding: 16px 16px;
-    margin: 0 auto 14px auto;
-    width: 92%;
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
 }
+
 
 #facts-faqs .question-form input,
 #facts-faqs .question-form .question-input {
