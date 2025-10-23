@@ -135,11 +135,11 @@ h3 {
                                                             NAVBAR
 ==============================================================================================================================*/
 .navbar {
-  position: fixed; /* changed from sticky to fixed */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000; /* increased to ensure it stays above all content */
+  z-index: 1000;
   width: 100%;
   height: 90px;
   display: flex;
@@ -223,8 +223,26 @@ body {
   .navbar { 
     height: 70px; 
   }
+  
   body {
     padding-top: 70px;
+  }
+  
+  /* Hide logo and redistribute nav items evenly */
+  .logo {
+    display: none;
+  }
+  
+  .nav-links {
+    justify-content: space-evenly;
+  }
+  
+  .nav-links li:not(.logo) {
+    flex: 1;
+  }
+  
+  .nav-links a {
+    font-size: 1.2rem;
   }
 }
 
@@ -233,8 +251,15 @@ body {
     height: 50px;
     padding: 0 1rem;
   }
+  
   body {
     padding-top: 50px;
+  }
+  
+  /* Logo remains hidden from tablet breakpoint */
+  .nav-links a {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
   }
 }
 /*==============================================================================================================================
