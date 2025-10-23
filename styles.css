@@ -221,6 +221,16 @@ body {
   transform: scaleX(1);
 }
 
+@media (min-width: 1025px) {
+  .nav-links a.active {
+    background-color: var(--clr-secondary);
+    border-radius: 4px;
+  }
+  .nav-links a.active::after {
+    transform: scaleX(1); /* show underline like hover */
+  }
+}
+
 /*==============================
   NAVBAR: TABLET VIEWPORT
 ==============================*/
@@ -1518,7 +1528,7 @@ body {
 }
 
 /*==============================
-  [5] FAQS: TABLET VIEWPORT
+  [4] FAQS: TABLET VIEWPORT
 ==============================*/
 
 @media (max-width: 1024px) {
@@ -1534,6 +1544,37 @@ body {
     justify-content: center;
   }
 
+  #facts-faqs .qa-list {
+    align-items: center;
+  }
+
+    #facts-faqs .qa-item,
+  #facts-faqs .qa-item.fact,
+  #facts-faqs .qa-item.faq,
+  #facts-faqs .qa-item.clicked {
+    width: min(92%, 720px) !important; 
+    max-width: 720px;
+    margin: 0 auto 16px auto !important; 
+    padding: 18px 24px !important;      
+    border-radius: 28px !important;   
+    transform: none !important;          
+    left: auto !important;
+    right: auto !important;
+  }
+
+  #facts-faqs .qa-item .qa-text {
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+
+  #facts-faqs .qa-item .qa-arrow {
+    display: none !important;
+  }
+}
+
   #facts-faqs .qa-item.clicked .qa-text {
     text-align: center !important;
     padding: 0 12px;
@@ -1544,7 +1585,6 @@ body {
 
   #facts-faqs .qa-item.clicked .qa-arrow { display: none !important; }
   #facts-faqs .qa-item.clicked, #facts-faqs .qa-item.clicked:hover { transform: none !important; }
-}
 
 
 @media (max-width: 1024px) {
@@ -1694,10 +1734,6 @@ body {
     display: none !important;
   }
 
-  #facts-faqs .qa-list {
-    align-items: center;
-  }
-
   /* Clicked/active presentation */
   #facts-faqs .fact-item.clicked,
   #facts-faqs .faq-item.clicked,
@@ -1836,6 +1872,54 @@ body {
     padding: 0.6rem 0.9rem;
     border-radius: 20px;
     font-size: 0.95rem;
+  }
+
+  #facts-faqs .qa-list {
+    width: 100%;
+    padding-inline: clamp(8px, 4vw, 16px);
+    gap: clamp(10px, 3.5vw, 16px);
+    align-items: stretch; /* let children take full width */
+  }
+
+
+  #facts-faqs .qa-item,
+  #facts-faqs .qa-item.fact,
+  #facts-faqs .qa-item.faq,
+  #facts-faqs .qa-item.clicked {
+    width: 100% !important;                 /* override any inline width set by JS */
+    max-width: 100%;
+    margin: 0 auto !important;
+    padding: clamp(12px, 3.8vw, 18px) clamp(14px, 5vw, 22px) !important;
+    border-radius: clamp(18px, 6vw, 28px) !important;
+    min-height: clamp(56px, 14vw, 80px);
+    box-sizing: border-box;
+    transform: none !important;             /* avoid hover shifts on touch */
+    left: auto !important;
+    right: auto !important;
+  }
+
+  /* Tighten asymmetric desktop offsets and keep text readable at all widths */
+  #facts-faqs .qa-item .qa-text {
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0;
+    width: 100%;
+    font-size: clamp(0.9rem, 3.8vw, 1rem);
+    line-height: clamp(1.25, 4.2vw, 1.45);
+    word-break: break-word;
+    overflow-wrap: anywhere; /* prevent overflow from long words/URLs */
+    white-space: normal;
+  }
+
+  /* Hide arrows for perfect centering and to save space */
+  #facts-faqs .qa-item .qa-arrow {
+    display: none !important;
+  }
+
+  /* Ensure active/clicked state stays responsive too */
+  #facts-faqs .qa-item.clicked .qa-text {
+    padding: 0 !important;
+    text-align: center !important;
   }
 }
 
@@ -2109,7 +2193,6 @@ h3, h4 {
   will-change: transform;
 }
 
-/* Tablet (415px–1024px) */
 @media (min-width: 415px) and (max-width: 1024px) {
   .training-header .training-title,
   .nutrition-header .nutrition-title,

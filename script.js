@@ -3,7 +3,71 @@
 // Author: Aerith Catap | Block: CS-201 | Date: October 21, 2025
 // Submitted to: Mr. Chris Almocera
 
+// ==========================================
+// NAVBAR ACTIVE LINK (Desktop): Scroll spy (robust)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+  if (!navLinks.length) return;
 
+  // Map hrefs (#cover, #training, ...) to actual sections
+  const sections = navLinks
+    .map(a => (a.getAttribute("href") || "").trim())
+    .filter(href => href.startsWith("#"))
+    .map(href => document.querySelector(href))
+    .filter(Boolean);
+
+  if (!sections.length) return;
+
+  function setActive(id) {
+    navLinks.forEach(a => {
+      const href = a.getAttribute("href");
+      a.classList.toggle("active", href === `#${id}`);
+    });
+  }
+
+  // Pick the section whose center is closest to the viewport center
+  function updateActiveByScroll() {
+    const vpCenter = window.innerHeight / 2;
+    let best = null;
+    let bestDist = Infinity;
+
+    for (const sec of sections) {
+      const rect = sec.getBoundingClientRect();
+      const secCenter = rect.top + rect.height / 2;
+      const dist = Math.abs(secCenter - vpCenter);
+      if (dist < bestDist) {
+        best = sec;
+        bestDist = dist;
+      }
+    }
+    if (best) setActive(best.id);
+  }
+
+  // rAF throttle
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateActiveByScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  // Init + listeners
+  updateActiveByScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", updateActiveByScroll, { passive: true });
+
+  // Also update right after clicking a nav link (after native scroll)
+  navLinks.forEach(a => {
+    a.addEventListener("click", () => {
+      setTimeout(updateActiveByScroll, 100);
+    });
+  });
+});
 // ==========================================
 // COVER SECTION - Rotating quotes & images
 // ==========================================
