@@ -45,7 +45,7 @@
                     <!--Navbar logo-->
                     <li class="logo"><img src="assets/icon_white.png" alt="BodyBLDR Logo"></li>
                     <li><a href="#nutrition">Nutrition</a></li>
-                    <li><a href="#faqs">FAQs</a></li>
+                    <li><a href="#facts-faqs">FAQs</a></li>
                 </ul>
             </nav>
         </header>
@@ -82,7 +82,7 @@
                         <span>1</span>
                     </div>
                     <div class="phase-content right">
-                        <h3 class="phase-title">Start smart.</h3>
+                        <h5 class="phase-title">Start smart.</h5>
                         <p class="phase-description">
                             Learn the foundation — squats, presses, pulls, and core lifts that build real strength. Focus on technique before chasing numbers.
                         </p>
@@ -92,7 +92,7 @@
                 <!-- Phase 2: Build consistency -->
                 <div class="training-phase phase-2">
                     <div class="phase-content left">
-                        <h3 class="phase-title">Build consistency.</h3>
+                        <h5 class="phase-title">Build consistency.</h5>
                         <p class="phase-description">
                             Learn the foundation — squats, presses, pulls, and core lifts that build real strength. Focus on technique before chasing numbers.
                         </p>
@@ -116,7 +116,7 @@
                         <span>3</span>
                     </div>
                     <div class="phase-content right">
-                        <h3 class="phase-title">Push limits.</h3>
+                        <h5 class="phase-title">Push limits.</h5>
                         <p class="phase-description">
                             Once you've mastered the basics, challenge yourself with drop sets, supersets, and progressive overload to keep growing stronger.
                         </p>
@@ -132,55 +132,142 @@
                 </div>
             </div>
         </section>
-
-
-        <section id="facts-faqs">
-            <div class="section-header">
-                <h2>FACTS AND FAQS</h2>
-                <p>Let's get things straight.</p>
+<section id="nutrition" class="nutrition-section">
+        <div class="nutrition-container">
+            <div class="nutrition-header">
+                <h3 class="nutrition-title">Nutrition</h3>
+                <h4 class="nutrition-subtitle">Fuel your growth.</h4>
             </div>
-
-                <!-- FACTS (Left) -->
-                <div class="fact-item">
-                    <p>Skipping one workout ruins everything</p>
-                    <img src="assets/button_left.png" alt="arrow left" class="arrow">
+            <div class="nutrition-container-quote" aria-label="Nutrition Quote">
+                <div class="content">
+                    Your body is built in the gym — but shaped in the kitchen.
                 </div>
-                <div class="fact-item">
-                    <p>Lifting is only for men.</p>
-                    <img src="assets/button_left.png" alt="arrow left" class="arrow">
-                </div>
-                <div class="fact-item">
-                    <p>You should lose or gain weight before starting.</p>
-                    <img src="assets/button_left.png" alt="arrow left" class="arrow">
-                </div>
-
-                <!-- FAQS (Right) -->
-                <div class="faq-item">
-                    <img src="assets/button_right.png" alt="arrow right" class="arrow">
-                    <p>How often should I work out?</p>
-                </div>
-                <div class="faq-item">
-                    <img src="assets/button_right.png" alt="arrow right" class="arrow">
-                    <p>How long before I see progress?</p>
-                </div>
-                <div class="faq-item">
-                    <img src="assets/button_right.png" alt="arrow right" class="arrow">
-                    <p>Do I need supplements right away?</p>
-                </div>
-
-            <!-- Question Form -->
-            <div class="question-form">
-                <h3>Got more questions? Send them here!</h3>
-                <form>
-                <input type="text" placeholder="Type your question here...">
-                </form>
             </div>
-            </section>
+            <div class="nutrition-layout">
+                <div class="nutrition-macro-container">
+                    <h5 class="nutrition-titles">Track to transform.</h5>
+                    <p class="macro-description">
+                       Monitor your food intake through tracking apps. Stay hydrated, balance your macros, and adjust as your body evolves.
+                    </p>
+                    <img id="macro-image" class="macro-image" src="/assets/maintenance_macro.png" alt="Macro Chart" />
+                    <div class="macro-text-container">
+                        <img src="/assets/button_right.png" alt="Left Arrow" class="arrow left-arrow" id="prev-btn">
+                        <div class="macro-text-group">
+                            <span class="macro-text-selection" id="macro-text">Maintenance</span>
+                            <p class="macro-subtext">Macro Ratio</p>
+                        </div>
+                        <img src="/assets/button_left.png" alt="Right Arrow" class="arrow right-arrow" id="next-btn">
+                    </div>
+                </div>
+                <div class="nutrition-right">
+                    <div class="nutrition-eat-container">
+                        <h5 class="nutrition-eat-titles">Eat for strength.</h5>
+                        <p class="nutrition-eat-subtitles">
+                            Protein repairs your muscles, carbs power your workouts, and healthy fats keep your hormones balanced. Every meal matters.
+                        </p>
+                        <img src="/assets/energy.png" alt="Energy Icon">
+                    </div>
+                    <div class="nutrition-smart-container">
+                        <h5 class="nutrition-smart-titles">Smart choices.</h5>
+                        <p class="nutrition-smart-subtitles">
+                            Build your plate with clean, whole foods — lean meats, rice, oats, fruits, and vegetables.
+                            Small, consistent choices lead to big changes.
+                        </p>
+                        <img src="/assets/plate.png" alt="Plate Icon">
+                    </div>
+                </div>
+            </div>
+            <div class="nutrition-food-section">
+                <div class="nutrition-food-choice">
+                    <div class="nutrition-food-choice-container">
+                        <h5 class="nutrition-food-choice-titles">Protein</h5>
+                        <p>Builds and repairs muscle tissue for growth and recovery.</p>
+                    </div>
+                </div>
+                <div class="nutrition-food-choice">
+                    <div class="nutrition-food-choice-container">
+                        <h5 class="nutrition-food-choice-titles-long">Carbohydrates</h5>
+                        <p>Fuel your workouts and keep your energy levels steady.</p>
+                    </div>
+                </div>
+                <div class="nutrition-food-choice">
+                    <div class="nutrition-food-choice-container">
+                        <h5 class="nutrition-food-choice-titles">Fats</h5>
+                        <p>Support hormones, joint health, and overall body function.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section id="facts-faqs">
 
+  <div class="section-header">
+    <h3>Facts and FAQs</h3>
+    <h4>Let's get things straight.</h4>
+  </div>
+
+  <!-- Alternating list: fact, faq, fact, faq -->
+  <div class="qa-list">
+    <div class="qa-item fact">
+      <p class="qa-text">Skipping one workout ruins everything.</p>
+      <img src="assets/button_left.png" alt="arrow right" class="qa-arrow">
+      <div class="qa-answer">One missed day won’t matter. What counts is showing up again the next time.</div>
+    </div>
+
+    <div class="qa-item faq">
+      <img src="assets/button_right.png" alt="arrow left" class="qa-arrow">
+      <p class="qa-text">How often should I work out?</p>
+      <div class="qa-answer">Start with 3–4 days a week, giving your muscles time to rest and recover between sessions.</div>
+    </div>
+
+    <div class="qa-item fact">
+      <p class="qa-text">Lifting is only for men.</p>
+      <img src="assets/button_left.png" alt="arrow right" class="qa-arrow">
+      <div class="qa-answer">Strength training benefits everyone — it builds confidence, posture, and overall health.</div>
+    </div>
+
+    <div class="qa-item faq">
+      <img src="assets/button_right.png" alt="arrow left" class="qa-arrow">
+      <p class="qa-text">How long before I see progress?</p>
+      <div class="qa-answer">Most beginners notice progress in 4–8 weeks — stay consistent and it will show.</div>
+    </div>
+
+    <div class="qa-item fact">
+      <p class="qa-text">You should lose or gain weight before starting.</p>
+      <img src="assets/button_left.png" alt="arrow right" class="qa-arrow">
+      <div class="qa-answer">You can start training at any stage. Exercise helps your body adapt — whether you’re aiming to tone up, gain strength, or lose fat.</div>
+    </div>
+
+    <div class="qa-item faq">
+      <img src="assets/button_right.png" alt="arrow left" class="qa-arrow">
+      <p class="qa-text">Do I need supplements right away?</p>
+      <div class="qa-answer">Not at all. Focus on real food, sleep, and consistency — supplements can come later.</div>
+    </div>
+  </div>
+
+  <!-- Question Form -->
+  <div class="question-form">
+    <h5>Got more questions? Send them here!</h5>
+    <form>
+      <input type="text" class="question-input" placeholder="Type your question here...">
+    </form>
+  </div>
+
+</section>
     </main>
 
-    <footer>
-
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-socials">
+          <a href="https://facebook.com/aerith.catap" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <img src="assets/facebook.png" alt="Facebook">
+          </a>
+          <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <img src="https://www.linkedin.com/in/aerith-catap-594540346/" alt="LinkedIn">
+          </a>
+        </div>
+        <p class="footer-copyright">© 2025 Aerith C. | All Rights Reserved.</p>
+      </div>
     </footer>
 
     <!--Scripts-->

@@ -246,4 +246,209 @@ function disableHoverOnMobile() {
 
 window.addEventListener("resize", disableHoverOnMobile);
 window.addEventListener("load", disableHoverOnMobile);
+// === Nutrition interactions ===
+document.addEventListener("DOMContentLoaded", () => {
+  // 1) Macro arrows: cycle image + text
+  const macroImg = document.getElementById("macro-image");
+  const macroText = document.getElementById("macro-text");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
 
+  const macroModes = [
+    { label: "Maintenance", src: "assets/maintenance_macro.png" },
+    { label: "Fat loss",    src: "assets/fatloss_macro.png" },
+    { label: "Muscle gain", src: "assets/bulking_macro.png" },
+  ];
+  let macroIndex = 0;
+
+  function applyMacro() {
+    if (!macroImg || !macroText) return;
+    macroImg.style.opacity = "0";
+    macroText.style.opacity = "0";
+    window.setTimeout(() => {
+      const mode = macroModes[macroIndex];
+      macroImg.src = mode.src;
+      macroText.textContent = mode.label;
+      const fadeIn = () => {
+        macroImg.style.opacity = "1";
+        macroText.style.opacity = "1";
+      };
+      if (macroImg.complete) {
+        requestAnimationFrame(fadeIn);
+      } else {
+        macroImg.onload = fadeIn;
+      }
+    }, 160);
+  }
+
+  prevBtn?.addEventListener("click", () => {
+    macroIndex = (macroIndex + macroModes.length - 1) % macroModes.length;
+    applyMacro();
+  });
+  nextBtn?.addEventListener("click", () => {
+    macroIndex = (macroIndex + 1) % macroModes.length;
+    applyMacro();
+  });
+
+  // 2) Nutrition Food Choice hover -> show food lists; mouseout -> restore
+  const foodLists = {
+    protein: [
+      "Chicken breast",
+      "Eggs",
+      "Fish (tuna, salmon)",
+      "Lean beef",
+      "Greek yogurt",
+    ],
+    carbohydrates: [
+      "Rice",
+      "Oats",
+      "Sweet potatoes",
+      "Whole-grain bread",
+      "Bananas",
+    ],
+    fats: [
+      "Avocado",
+      "Olive oil",
+      "Nuts",
+      "Peanut butter",
+      "Chia seeds",
+    ],
+  };
+
+  // Fixed: query for .nutrition-food-choice-container and use h5
+  document.querySelectorAll(".nutrition-food-choice-container").forEach((card) => {
+    const titleEl = card.querySelector("h5");  // changed from h3 to h5
+    const pEl = card.querySelector("p");
+    if (!titleEl || !pEl) return;
+
+    const titleText = titleEl.textContent.trim().toLowerCase();
+    const originalHTML = pEl.innerHTML;
+
+    card.addEventListener("mouseenter", () => {
+      const list = foodLists[titleText];
+      if (list) {
+        pEl.innerHTML = list.join("<br>");
+      }
+    });
+
+    card.addEventListener("mouseleave", () => {
+      pEl.innerHTML = originalHTML;
+    });
+  });
+});
+
+// Add this to your existing DOMContentLoaded block or create a new one:
+
+document.addEventListener("DOMContentLoaded", () => {
+  const nutritionSection = document.querySelector('.nutrition-section');
+  
+  if (nutritionSection) {
+    // Desktop: dim on mouse leave, brighten on mouse enter
+    if (window.innerWidth >= 1025) {
+      nutritionSection.addEventListener("mouseenter", () => nutritionSection.classList.remove("dimmed"));
+      nutritionSection.addEventListener("mouseleave", () => nutritionSection.classList.add("dimmed"));
+      nutritionSection.classList.add("dimmed"); // start dimmed
+    }
+
+    // Tablet/Mobile: dim when scrolled out of view
+    if (window.innerWidth < 1025) {
+      window.addEventListener('scroll', () => {
+        const rect = nutritionSection.getBoundingClientRect();
+        if (rect.top > window.innerHeight || rect.bottom < 0) {
+          nutritionSection.classList.add('dimmed');
+        } else {
+          nutritionSection.classList.remove('dimmed');
+        }
+      });
+    }
+  }
+});
+
+// Add this to your existing DOMContentLoaded blocks:
+
+document.addEventListener("DOMContentLoaded", () => {
+  const factsFaqsSection = document.querySelector('#facts-faqs');
+  
+  if (factsFaqsSection) {
+    // Desktop: dim on mouse leave, brighten on mouse enter
+    if (window.innerWidth >= 1025) {
+      factsFaqsSection.addEventListener("mouseenter", () => factsFaqsSection.classList.remove("dimmed"));
+      factsFaqsSection.addEventListener("mouseleave", () => factsFaqsSection.classList.add("dimmed"));
+      factsFaqsSection.classList.add("dimmed"); // start dimmed
+    }
+
+    // Tablet/Mobile: dim when scrolled out of view
+    if (window.innerWidth < 1025) {
+      window.addEventListener('scroll', () => {
+        const rect = factsFaqsSection.getBoundingClientRect();
+        if (rect.top > window.innerHeight || rect.bottom < 0) {
+          factsFaqsSection.classList.add('dimmed');
+        } else {
+          factsFaqsSection.classList.remove('dimmed');
+        }
+      });
+    }
+  }
+});
+
+// Add scroll-triggered centering animation for h3 and h4
+document.addEventListener("DOMContentLoaded", () => {
+  const animatedHeaders = document.querySelectorAll("h3, h4");
+  
+  // Add scroll-animate class to all h3 and h4
+  animatedHeaders.forEach(header => {
+    header.classList.add("scroll-animate");
+  });
+
+  // Intersection Observer to detect when elements are centered
+  const observerOptions = {
+    threshold: [0, 0.5, 1], // track visibility at 0%, 50%, 100%
+    rootMargin: "-20% 0px -20% 0px" // consider element centered when in middle 60% of viewport
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        // Element is centered in viewport
+        entry.target.classList.add("centered");
+      } else {
+        // Element is not centered
+        entry.target.classList.remove("centered");
+      }
+    });
+  }, observerOptions);
+
+  // Observe all h3 and h4 elements
+  animatedHeaders.forEach(header => {
+    observer.observe(header);
+  });
+
+  // Optional: Manual scroll handler for smoother transitions
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        animatedHeaders.forEach(header => {
+          const rect = header.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+          const elementCenter = rect.top + (rect.height / 2);
+          const viewportCenter = viewportHeight / 2;
+          
+          // Calculate how far from center (0 = centered, 1 = at edge)
+          const distanceFromCenter = Math.abs(elementCenter - viewportCenter) / viewportCenter;
+          
+          // Apply gradual transform based on distance
+          if (header.tagName === "H3") {
+            const translateX = -40 * distanceFromCenter; // moves left when not centered
+            header.style.transform = `translateX(${translateX}vw)`;
+          } else if (header.tagName === "H4") {
+            const translateX = 40 * distanceFromCenter; // moves right when not centered
+            header.style.transform = `translateX(${translateX}vw)`;
+          }
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+});
