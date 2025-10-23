@@ -832,66 +832,90 @@ body {
   [2] TRAINING: MOBILE VIEWPORT
 ==============================*/
 
+/* Training section — mobile layout fixes: order, spacing, scaling */
 @media (max-width: 414px) {
-  .training-phase {
+  /* Container and header spacing */
+  #training .training-container {
+    width: 92%;
+    padding: 30px 0;
+  }
+  #training .training-header {
+    margin-bottom: 24px;
+  }
+
+  /* Each phase: vertical stack, centered, with tighter spacing between phases */
+  #training .training-phase {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 0.75rem;
+    gap: 0.75rem;            /* reduced from 0.9rem for a tighter stack */
+    padding: 8px 0;
+    margin-bottom: clamp(10px, 3vw, 14px); /* reduced from 20px to shrink space to next image */
     min-height: auto;
     position: relative;
   }
-
-  .phase-image-container {
-    position: static !important;
-    width: clamp(140px, 43.48vw, 180px);
-    height: clamp(120px, 36.23vw, 150px);
-    border-radius: clamp(18px, 22%, 60px);
-    margin: 0 !important;
-    order: 1;
+  /* No extra space after the last phase */
+  #training .training-phase:last-child {
+    margin-bottom: 0;
   }
 
-  .phase-number {
+  /* Image first */
+  #training .phase-image-container {
     position: static !important;
-    width: clamp(45px, 12.08vw, 50px);
-    height: clamp(45px, 12.08vw, 50px);
+    order: 1;
+    width: clamp(160px, 58vw, 220px);
+    height: clamp(120px, 42vw, 180px);
+    border-radius: clamp(18px, 22%, 60px);
     margin: 0 !important;
+  }
+
+  /* Then the phase number (scales with viewport) */
+  #training .phase-number {
+    position: static !important;
     order: 2;
+    width: clamp(44px, 14vw, 60px);
+    height: clamp(44px, 14vw, 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--clr-tertiary);
     transform: none;
     opacity: 1;
   }
-  .phase-number span {
-    font-size: clamp(1.5rem, 7.25vw, 30px);
+  #training .phase-number span {
+    font-size: clamp(1rem, 6.2vw, 1.5rem);
+    line-height: 1;
     color: var(--clr-main);
   }
 
-  .phase-content {
+  /* Then the text content */
+  #training .phase-content {
+    order: 3;
     display: flex !important;
     flex-direction: column;
     align-items: center !important;
     text-align: center !important;
+    gap: 0.35rem;
     padding: 0 !important;
-    gap: 0.25rem;
-    max-width: 100% !important;
     margin: 0 !important;
-  }
-  .phase-title { align-self: center; }
-  .phase-description { align-self: center; }
-
-  .phase-title {
-    font-size: clamp(1.5rem, 7.73vw, 32px);
-    margin-top: 0;
-  }
-  .phase-description {
-    font-size: clamp(0.75rem, 3.86vw, 16px);
-    line-height: 1.4;
-    margin-top: 0;
+    max-width: 100% !important;
   }
 
-  /* Hide connecting lines on mobile */
-  .phase-line { display: none !important; }
+  #training .phase-title {
+    font-size: clamp(1.125rem, 5.8vw, 1.5rem);
+    margin: 0;
+  }
+  #training .phase-description {
+    font-size: clamp(0.875rem, 3.9vw, 1rem);
+    line-height: 1.45;
+    margin: 0;
+    max-width: 40ch; /* readable line length */
+  }
+
+  /* Hide connector line on mobile */
+  #training .phase-line {
+    display: none !important;
+  }
 }
 
 /*==============================================================================================================================
@@ -970,7 +994,7 @@ body {
   border-radius: 177px;
   text-align: center;
   padding: 20px 40px;
-  margin: 0 auto 32px auto;
+  margin: 0 auto 15px auto;
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
   box-sizing: border-box;
 }
@@ -1668,6 +1692,10 @@ body {
   #facts-faqs .fact-item .arrow,
   #facts-faqs .faq-item .arrow {
     display: none !important;
+  }
+
+  #facts-faqs .qa-list {
+    align-items: center;
   }
 
   /* Clicked/active presentation */
