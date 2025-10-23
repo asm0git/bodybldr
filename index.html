@@ -29,44 +29,37 @@
         <!--Stylesheet(CSS)-->
         <link rel="stylesheet" href="styles.css">
     </head>
-
-<body>
-    <header>
-    </header>
-
+    
+    <body>
     <main>
         <!--Navbar-->
         <header>
             <nav class="navbar container">
+                <div class="logo">
+                    <img src="assets/icon_white.png" alt="BodyBLDR Logo"></li>
+                </div>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#cover">Home</a></li>
                     <li><a href="#training">Training</a></li>
-                    
-                    <!--Navbar logo-->
-                    <li class="logo"><img src="assets/icon_white.png" alt="BodyBLDR Logo"></li>
                     <li><a href="#nutrition">Nutrition</a></li>
                     <li><a href="#facts-faqs">FAQs</a></li>
                 </ul>
             </nav>
         </header>
 
+        <!-- [1] COVER PAGE -->
         <section id="cover">
             <div class="cover-content container">
                 <img src="assets/icon_white.png" alt="BodyBLDR Icon" class="cover-icon" />
                 <h1 id="cover-title"></h1>
-
-                <h2>
-                    Your all-in-one guide to building strength, discipline, and confidence.
-                </h2>
-
+                <h2>Your all-in-one guide to building strength, discipline, and confidence.</h2>
                 <img src="assets/arrow_down.png" alt="scroll down" class="arrow-down">
             </div>
         </section>
 
+        <!-- [2] TRAINING PAGE -->
        <section id="training">
             <div class="training-container">
-                <!-- Section Header -->
-
                 <div class="training-header">
                     <h3 class="training-title">Training</h3>
                     <h4 class="training-subtitle">Master your movement.</h4>
@@ -132,33 +125,35 @@
                 </div>
             </div>
         </section>
-<section id="nutrition" class="nutrition-section">
-        <div class="nutrition-container">
-            <div class="nutrition-header">
-                <h3 class="nutrition-title">Nutrition</h3>
-                <h4 class="nutrition-subtitle">Fuel your growth.</h4>
-            </div>
-            <div class="nutrition-container-quote" aria-label="Nutrition Quote">
-                <div class="content">
-                    Your body is built in the gym — but shaped in the kitchen.
+
+        <!-- [3] NUTRITION PAGE -->
+        <section id="nutrition" class="nutrition-section">
+            <div class="nutrition-container">
+                <div class="nutrition-header">
+                    <h3 class="nutrition-title">Nutrition</h3>
+                    <h4 class="nutrition-subtitle">Fuel your growth.</h4>
                 </div>
-            </div>
-            <div class="nutrition-layout">
-                <div class="nutrition-macro-container">
-                    <h5 class="nutrition-titles">Track to transform.</h5>
-                    <p class="macro-description">
-                       Monitor your food intake through tracking apps. Stay hydrated, balance your macros, and adjust as your body evolves.
-                    </p>
-                    <img id="macro-image" class="macro-image" src="assets/maintenance_macro.png" alt="Macro Chart" />
-                    <div class="macro-text-container">
-                        <img src="assets/button_right.png" alt="Left Arrow" class="arrow left-arrow" id="prev-btn">
-                        <div class="macro-text-group">
-                            <span class="macro-text-selection" id="macro-text">Maintenance</span>
-                            <p class="macro-subtext">Macro Ratio</p>
-                        </div>
-                        <img src="assets/button_left.png" alt="Right Arrow" class="arrow right-arrow" id="next-btn">
+
+                <div class="nutrition-container-quote" aria-label="Nutrition Quote">
+                    <div class="content">
+                        Your body is built in the gym — but shaped in the kitchen.
                     </div>
                 </div>
+
+                <div class="nutrition-layout">
+                    <div class="nutrition-macro-container">
+                        <h5 class="nutrition-titles">Track to transform.</h5>
+                        <p class="macro-description">Monitor your food intake through tracking apps. Stay hydrated, balance your macros, and adjust as your body evolves.</p>
+                        <img id="macro-image" class="macro-image" src="assets/maintenance_macro.png" alt="Macro Chart" />
+                        <div class="macro-text-container">
+                            <img src="assets/button_right.png" alt="Left Arrow" class="arrow left-arrow" id="prev-btn">
+                            <div class="macro-text-group">
+                                <span class="macro-text-selection" id="macro-text">Maintenance</span>
+                                <p class="macro-subtext">Macro Ratio</p>
+                            </div>
+                            <img src="assets/button_left.png" alt="Right Arrow" class="arrow right-arrow" id="next-btn">
+                        </div>
+                    </div>
                 <div class="nutrition-right">
                     <div class="nutrition-eat-container">
                         <h5 class="nutrition-eat-titles">Eat for strength.</h5>
@@ -167,14 +162,14 @@
                         </p>
                         <img src="assets/energy.png" alt="Energy Icon">
                     </div>
-                    <div class="nutrition-smart-container">
-                        <h5 class="nutrition-smart-titles">Smart choices.</h5>
-                        <p class="nutrition-smart-subtitles">
-                            Build your plate with clean, whole foods — lean meats, rice, oats, fruits, and vegetables.
-                            Small, consistent choices lead to big changes.
-                        </p>
-                        <img src="assets/plate.png" alt="Plate Icon">
-                    </div>
+                <div class="nutrition-smart-container">
+                    <h5 class="nutrition-smart-titles">Smart choices.</h5>
+                    <p class="nutrition-smart-subtitles">
+                        Build your plate with clean, whole foods — lean meats, rice, oats, fruits, and vegetables.
+                        Small, consistent choices lead to big changes.
+                    </p>
+                    <img src="assets/plate.png" alt="Plate Icon">
+                </div>
                 </div>
             </div>
             <div class="nutrition-food-section">
@@ -197,80 +192,101 @@
                     </div>
                 </div>
             </div>
+            </div>
+        </section>
+
+        <!-- [4] FAQS PAGE -->
+        <section id="facts-faqs">
+        <div class="section-header">
+            <h3>Facts and FAQs</h3>
+            <h4>Let's get things straight.</h4>
         </div>
+
+        <div class="qa-list">
+            <div class="qa-item fact">
+                <p class="qa-text">Skipping one workout ruins everything.</p>
+                <img src="assets/button_left.png" alt="arrow right" class="qa-arrow">
+                <div class="qa-answer">One missed day won’t matter. What counts is showing up again the next time.
+                </div>
+            </div>
+
+            <div class="qa-item faq">
+                <img src="assets/button_right.png" alt="arrow left" class="qa-arrow">
+                <p class="qa-text">How often should I work out?</p>
+                <div class="qa-answer">Start with 3–4 days a week, giving your muscles time to rest and recover between sessions.
+                </div>
+            </div>
+
+            <div class="qa-item fact">
+                <p class="qa-text">Lifting is only for men.</p>
+                <img src="assets/button_left.png" alt="arrow right" class="qa-arrow">
+                <div class="qa-answer">Strength training benefits everyone — it builds confidence, posture, and overall health.
+                </div>
+            </div>
+
+            <div class="qa-item faq">
+                <img src="assets/button_right.png" alt="arrow left" class="qa-arrow">
+                <p class="qa-text">How long before I see progress?</p>
+                <div class="qa-answer">Most beginners notice progress in 4–8 weeks — stay consistent and it will show.
+                </div>
+            </div>
+
+            <div class="qa-item fact">
+                <p class="qa-text">You should lose or gain weight before starting.</p>
+                <img src="assets/button_left.png" alt="arrow right" class="qa-arrow">
+                <div class="qa-answer">You can start training at any stage. Exercise helps your body adapt — whether you’re aiming to tone up, gain strength, or lose fat.
+                </div>
+            </div>
+
+            <div class="qa-item faq">
+                <img src="assets/button_right.png" alt="arrow left" class="qa-arrow">
+                <p class="qa-text">Do I need supplements right away?</p>
+                <div class="qa-answer">Not at all. Focus on real food, sleep, and consistency — supplements can come later.</div>
+            </div>
+        </div>
+
+    <!-- Question Form -->
+            <div class="form-field">
+            <label for="user-question" class="visually-hidden">Your question</label>
+            <textarea
+                id="user-question"
+                name="user-question"
+                class="question-input question-textarea"
+                placeholder="Type your question here..."
+                required
+                minlength="10"
+                maxlength="500"
+                title="Please enter at least 10 characters (max 500)"
+                aria-describedby="question-error"
+            ></textarea>
+            <span class="error-message" id="question-error" aria-live="polite"></span>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Question</button>
+
+            <div class="success-message" id="success-message" role="status" aria-live="polite" hidden>
+            Thank you! Your question has been submitted.
+            </div>
+        </form>
+        </div>
+
+
+    <!--Footer -->
     </section>
-<section id="facts-faqs">
-
-  <div class="section-header">
-    <h3>Facts and FAQs</h3>
-    <h4>Let's get things straight.</h4>
-  </div>
-
-  <!-- Alternating list: fact, faq, fact, faq -->
-  <div class="qa-list">
-    <div class="qa-item fact">
-      <p class="qa-text">Skipping one workout ruins everything.</p>
-      <img src="assets/button_left.png" alt="arrow right" class="qa-arrow">
-      <div class="qa-answer">One missed day won’t matter. What counts is showing up again the next time.</div>
-    </div>
-
-    <div class="qa-item faq">
-      <img src="assets/button_right.png" alt="arrow left" class="qa-arrow">
-      <p class="qa-text">How often should I work out?</p>
-      <div class="qa-answer">Start with 3–4 days a week, giving your muscles time to rest and recover between sessions.</div>
-    </div>
-
-    <div class="qa-item fact">
-      <p class="qa-text">Lifting is only for men.</p>
-      <img src="assets/button_left.png" alt="arrow right" class="qa-arrow">
-      <div class="qa-answer">Strength training benefits everyone — it builds confidence, posture, and overall health.</div>
-    </div>
-
-    <div class="qa-item faq">
-      <img src="assets/button_right.png" alt="arrow left" class="qa-arrow">
-      <p class="qa-text">How long before I see progress?</p>
-      <div class="qa-answer">Most beginners notice progress in 4–8 weeks — stay consistent and it will show.</div>
-    </div>
-
-    <div class="qa-item fact">
-      <p class="qa-text">You should lose or gain weight before starting.</p>
-      <img src="assets/button_left.png" alt="arrow right" class="qa-arrow">
-      <div class="qa-answer">You can start training at any stage. Exercise helps your body adapt — whether you’re aiming to tone up, gain strength, or lose fat.</div>
-    </div>
-
-    <div class="qa-item faq">
-      <img src="assets/button_right.png" alt="arrow left" class="qa-arrow">
-      <p class="qa-text">Do I need supplements right away?</p>
-      <div class="qa-answer">Not at all. Focus on real food, sleep, and consistency — supplements can come later.</div>
-    </div>
-  </div>
-
-  <!-- Question Form -->
-  <div class="question-form">
-    <h5>Got more questions? Send them here!</h5>
-    <form>
-      <input type="text" class="question-input" placeholder="Type your question here...">
-    </form>
-  </div>
-
-</section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-socials">
-          <a href="https://facebook.com/aerith.catap" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <img src="assets/facebook.png" alt="Facebook">
-          </a>
-          <a href="https://www.linkedin.com/in/aerith-catap-594540346/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <img src="assets/linkedin.png" alt="LinkedIn">
-          </a>
-        </div>
-        <p class="footer-copyright">© 2025 Aerith C. | All Rights Reserved.</p>
-      </div>
-    </footer>
-
-    <!--Scripts-->
+        </main>
+        <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-socials">
+                <a href="https://facebook.com/aerith.catap" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <img src="assets/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.linkedin.com/in/aerith-catap-594540346/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <img src="assets/linkedin.png" alt="LinkedIn">
+                </a>
+            </div>
+            <p class="footer-copyright">© 2025 Aerith C. | All Rights Reserved.</p>
+         </div>
+     </footer>
     <script src="script.js" defer></script>
 </body>
 </html>

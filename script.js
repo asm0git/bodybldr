@@ -3,6 +3,7 @@
 // Author: Aerith Catap | Block: CS-201 | Date: October 21, 2025
 // Submitted to: Mr. Chris Almocera
 
+
 // ==========================================
 // COVER SECTION - Rotating quotes & images
 // ==========================================
@@ -331,4 +332,150 @@ document.addEventListener("DOMContentLoaded", () => {
   
   updateHeaderPositions();
   window.addEventListener("resize", updateHeaderPositions, { passive: true });
+});
+
+// Form// Replace or insert this FORM VALIDATION section into script.js (keep other code intact)
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("question-form-element");
+  if (!form) return;
+
+  const nameInput = document.getElementById("user-name");
+  const emailInput = document.getElementById("user-email");
+  const questionInput = document.getElementById("user-question");
+  const successMessage = document.getElementById("success-message");
+  const submitBtn = document.getElementById("submit-question-btn");
+
+  // helper: show error
+  function showError(input, errorId, message) {
+    const errorEl = document.getElementById(errorId);
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.classList.add("show");
+    }
+    if (input) {
+      input.classList.add("error");
+      input.setAttribute("aria-invalid", "true");
+    }
+  }
+
+  // helper: clear single field error
+  function clearError(input, errorId) {
+    const errorEl = document.getElementById(errorId);
+    if (errorEl) {
+      errorEl.textContent = "";
+      errorEl.classList.remove("show");
+    }
+    if (input) {
+      input.classList.remove("error");
+      input.removeAttribute("aria-invalid");
+    }
+  }
+
+  function clearAllErrors() {
+    document.querySelectorAll(".error-message").forEach(el => {
+      el.textContent = "";
+      el.classList.remove("show");
+    });
+    document.querySelectorAll(".question-input").forEach(i => {
+      i.classList.remove("error");
+      i.removeAttribute("aria-invalid");
+    });
+  }
+
+  // validation rules (return null when valid, string when invalid)
+  function validateName(value) {
+    const trimmed = (value || "").trim();
+    if (!trimmed) return "Please enter your name";
+    if (trimmed.length < 2) return "Name must be at least 2 characters";
+    if (!/^[a-zA-Z\s'-]+$/.test(trimmed)) return "Name can only contain letters, spaces, hyphens, and apostrophes";
+    return null;
+  }
+
+  function validateEmail(value) {
+    const trimmed = (value || "").trim();
+    if (!trimmed) return "Please enter your email";
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(trimmed)) return "Please enter a valid email address";
+    return null;
+  }
+
+  function validateQuestion(value) {
+    const trimmed = (value || "").trim();
+    if (!trimmed) return "Please enter your question";
+    if (trimmed.length < 10) return "Question must be at least 10 characters";
+    if (trimmed.length > 500) return "Question must be less than 500 characters";
+    return null;
+  }
+
+  // real-time validation
+  nameInput?.addEventListener("input", () => {
+    const err = validateName(nameInput.value);
+    if (err) showError(nameInput, "name-error", err);
+    else clearError(nameInput, "name-error");
+  });
+
+  emailInput?.addEventListener("input", () => {
+    const err = validateEmail(emailInput.value);
+    if (err) showError(emailInput, "email-error", err);
+    else clearError(emailInput, "email-error");
+  });
+
+  questionInput?.addEventListener("input", () => {
+    const err = validateQuestion(questionInput.value);
+    if (err) showError(questionInput, "question-error", err);
+    else clearError(questionInput, "question-error");
+  });
+
+  // click handler for the button (prevent native submit/navigation)
+  submitBtn?.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    // Defensive: remove any fragment that might cause jump
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+
+    clearAllErrors();
+
+    const nameErr = validateName(nameInput?.value);
+    const emailErr = validateEmail(emailInput?.value);
+    const questionErr = validateQuestion(questionInput?.value);
+
+    if (nameErr) showError(nameInput, "name-error", nameErr);
+    if (emailErr) showError(emailInput, "email-error", emailErr);
+    if (questionErr) showError(questionInput, "question-error", questionErr);
+
+    // focus first invalid field
+    const firstInvalid = form.querySelector(".question-input.error");
+    if (firstInvalid) {
+      firstInvalid.focus({ preventScroll: true });
+      return;
+    }
+
+    // All valid -> simulate submit
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    // show success message
+    if (successMessage) successMessage.classList.add("show");
+
+    // simulate async submit
+    setTimeout(() => {
+      form.reset();
+      clearAllErrors();
+      if (successMessage) {
+        // keep success visible briefly
+        setTimeout(() => successMessage.classList.remove("show"), 4000);
+      }
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send Question";
+    }, 800);
+  });
+
+  // Also prevent unexpected native form submit (safety)
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
 });
