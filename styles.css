@@ -267,9 +267,8 @@ body {
   }
 }
 
-
 /*==============================
-  NAVBAR: MOBILE VIEWPORT (BURGER)
+  NAVBAR: MOBILE VIEWPORT
 ==============================*/
 @media (max-width: 414px) {
   .navbar {
@@ -2253,28 +2252,6 @@ h3, h4 {
   .training-header .training-title + .training-subtitle,
   .nutrition-header .nutrition-title + .nutrition-subtitle,
   #facts-faqs .section-header h3 + h4 {
-    margin-top: 6px;
-  }
-}
-
-.navbar .nav-links,
-.navbar .nav-links li {
-  list-style: none;
-}
-.navbar .nav-links li::marker {
-  content: "";
-}
-.navbar .nav-links {
-  margin: 0;
-  padding: 0;
-}
-
-/* Ensure burger is visible on ≤414px and aligned right */
-@media (max-width: 414px) {
-  .navbar {
-    justify-content: flex-end;
-  }
-  .burger-btn {
-    display: inline-flex !important;
+    margin-top: 6px; /* tight but readable on small screens */
   }
 }
